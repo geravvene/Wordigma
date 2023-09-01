@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.content {
+  @apply border-gray-light flex flex-col gap-3 mt-3 pl-3 border-l-2;
+}
+.input {
+  @apply bg-gray-dark p-1 rounded-md;
+  outline: none;
+}
+.error {
+  @apply text-red text-[0.7rem] leading-[0.7rem] before:inline before:content-["⚠_"];
+}
+.nav_menu {
+  @apply absolute transition-all duration-150 -translate-x-full bg-gray-dark rounded-br-[0.7rem];
+}
+.active {
+  @apply translate-x-[0%];
+}
+.grid12 {
+  @apply grid grid-cols-12 gap-6;
+}
+.grid12-3 {
+  @apply grid grid-cols-12 gap-3;
+}
+.flexcol {
+  @apply flex flex-col;
+}
+.fullcenter {
+  @apply justify-center items-center;
+}
+.betcenter {
+  @apply justify-between items-center;
+}
+.shadows {
+  @apply shadow-black shadow-md;
+}
+.round{
+  @apply rounded-t-md rounded-b-xl
+}
