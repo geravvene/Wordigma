@@ -18,11 +18,15 @@ const Navbar = ({ isActive, setIsActive, refs }) => {
               key={refs[0].id}
               text={refs[0]}
               src={
-                <img
-                  alt={`acc_icon`}
-                  className={`rounded-md w-5 h-5 ml-3`}
-                  src={user.img}
-                />
+                user.img ? (
+                  <img
+                    alt={`acc_icon`}
+                    className={`rounded-md w-5 h-5 ml-3`}
+                    src={user.img}
+                  />
+                ) : (
+                  ``
+                )
               }
             />
             {refs.slice(2).map((ref) => (

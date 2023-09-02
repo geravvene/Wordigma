@@ -9,7 +9,6 @@ export const DataService = {
   async setUser(data) {
     user = data;
   },
-
   async getData(path) {
     return (await axiosInstanse.get(path).catch((err) => console.log(err))).data;
   },

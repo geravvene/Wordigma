@@ -73,8 +73,8 @@ const Quote = ({ quote, author, user, openId, setOpenId, width }) => {
 
             <div
               id={`more${quote.id}`}
-              className={`max-w-fit h-full items-center hidden`}
-            >
+              className={`max-w-fit h-full items-center hidden ${user.name ? `` :`mr-1`}
+           `}>
               <ClassicBtn
                 func={setOpenId}
                 arg={quote.id == openId ? false : quote.id}
