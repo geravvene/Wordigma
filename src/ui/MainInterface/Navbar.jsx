@@ -25,7 +25,7 @@ const Navbar = ({ isActive, setIsActive, refs }) => {
                     src={user.img}
                   />
                 ) : (
-                  ``
+                  null
                 )
               }
             />

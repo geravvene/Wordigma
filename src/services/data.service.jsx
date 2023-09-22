@@ -10,7 +10,8 @@ export const DataService = {
     user = data;
   },
   async getData(path) {
-    return (await axiosInstanse.get(path).catch((err) => console.log(err))).data;
+    return (await axiosInstanse.get(path).catch((err) => console.log(err)))
+      .data;
   },
   async getFilteredByArrayData(path, property, filterArray) {
     return (
@@ -27,7 +28,6 @@ export const DataService = {
       : [];
   },
 
-
   async postUserRegistrationData(data) {
     if ((await DataService.getData(`users?name=${data.username}`))[0])
       throw new Error("Имя занято");
@@ -43,9 +43,8 @@ export const DataService = {
     if (
       (user.favorite.includes(id) && add) ||
       (!user.favorite.includes(id) && !add)
-    ) {
-      return;
-    }
+    )return;
+
     return axiosInstanse
       .patch(`users/${user.id}`, {
         favorite: add
@@ -64,10 +63,10 @@ export const DataService = {
       .then(async () => this.setUser(await this.getData(`users/${user.id}`)));
   },
 
-  async getRecommendedQuotes() {
+  async getRecommendedQuotes(limit, page) {
     return !user.favorite
-      ? this.getData(`quotes`)
-      : (await this.getData(`quotes`)).filter(
+      ? this.getData(`quotes?_limit=${limit}&_page=${page}`)
+      : (await this.getData(`quotes?_limit=10`)).filter(
           (n) => !user.favorite.includes(n.id)
         );
   },

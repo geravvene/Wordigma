@@ -41,7 +41,7 @@ const List = ({ title, author }) => {
               {title.includes(`Цитаты`) ? (
                 <QuotesList
                   data={data}
-                  authors={author ? author : authors}
+                  authors={author ?? authors}
                   user={user}
                 />
               ) : (

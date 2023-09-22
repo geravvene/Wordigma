@@ -15,7 +15,7 @@ const ClassicBtn = ({
     <>
       <button
         type={type}
-        onClick={func ? () => func(arg) : () => false}
+        onClick={() => func(arg) ?? null}
         className={`flexcol items-center duration-150 w-full ${
           color +
           ` ` +
@@ -23,11 +23,11 @@ const ClassicBtn = ({
           color +
           `-light` +
           ` ` +
-          (padding ? padding : `p-1.5`) +
+          (padding ?? `p-1.5`) +
           ` ` +
-          (rounded ? rounded : `rounded-md`) +
+          (rounded ?? `rounded-md`) +
           ` ` +
-          (shadow ? shadow : `shadows`) +
+          (shadow ?? `shadows`) +
           ` ` +
           className
         }`}

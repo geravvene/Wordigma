@@ -19,7 +19,7 @@ export const FuncService = {
   getPropertyArray(data, property) {
     return data.map((item) => item[property]);
   },
-  isTextOverflow(quote_id, width) {
+  isTextOverflow(quote_id) {
     return (
       $(`#text${quote_id}`).height() >=
       125 - (window.location.href.includes(`authors`) ? 0 : 25)
