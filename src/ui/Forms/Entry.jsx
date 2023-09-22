@@ -63,6 +63,7 @@ const Entry = ({ setUser, setText }) => {
                 value: 6,
                 message: "Минимум 6 символов",
               },
+              pattern: { value: /[0-9]+/, message: "Содержит хотя бы одно число" },
             })}
             errors={errors}
           />
@@ -73,11 +74,7 @@ const Entry = ({ setUser, setText }) => {
             disabled={isSubmitting}
             src={setUser ? `Войти` : `Зарегистрироваться`}
             rounded={`rounded-lg`}
-            color={
-              setUser
-                ? `bg-green`
-                : `bg-blue`
-            }
+            color={setUser ? `bg-green` : `bg-blue`}
           />
         </div>
       </form>

@@ -77,7 +77,7 @@ const Quote = ({ quote, author, user, openId, setOpenId, width }) => {
            `}>
               <ClassicBtn
                 func={setOpenId}
-                arg={quote.id == openId ? null : arg=quote.id}
+                arg={quote.id == openId ? null : quote.id}
                 padding={` `}
                 src={<VscChevronDown color="white" />}
                 rounded={`round`}
