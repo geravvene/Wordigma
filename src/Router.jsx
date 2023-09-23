@@ -5,9 +5,9 @@ import Header from "./ui/MainInterface/Header.jsx";
 import AuthorPage from "./screens/AuthorPage";
 import Authorization from "./screens/Authorization";
 import Profile from "./screens/Profile";
-import List from "./ui/List";
+import QuotesList from "./ui/Quotes/QuotesList";
 import { Navigate } from "react-router-dom";
-
+import AuthorList from "./ui/Authors/AuthorList";
 const Router = () => {
   return (
     <>
@@ -17,8 +17,11 @@ const Router = () => {
           <Routes>
             <Route element={<Navigate to="/reg" />} path={`/`} />
             <Route element={<Authorization />} path={`/reg`} />
-            <Route element={<List title={`Цитаты`} />} path={`/rec`} />
-            <Route element={<List title={`Авторы`} />} path={`/authors`} />
+            <Route element={<QuotesList title={`Цитаты`} />} path={`/rec`} />
+            <Route
+              element={<AuthorList title={`Авторы`} />}
+              path={`/authors`}
+            />
             <Route element={<AuthorPage />} path={`/authors/:id`} />
             <Route element={<Profile />} path={`/acc`} />
             <Route element={<div> Not Found </div>} path={`*`} />

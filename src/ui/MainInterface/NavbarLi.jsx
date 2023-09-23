@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const NavbarLi = ({ text, src }) => {
+const NavbarLi = ({ text, children }) => {
   return (
     <li className={`pt-6`}>
       <Link
@@ -12,7 +12,7 @@ const NavbarLi = ({ text, src }) => {
         }`}
       >
         {text.value}
-        {src}
+        {children}
       </Link>
     </li>
   );

@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import NavbarLi from "./NavbarLi";
 
@@ -14,21 +13,16 @@ const Navbar = ({ isActive, setIsActive, refs }) => {
       >
         <ul className={`p-3 text-left`}>
           <div className={`border-t-2 border-gray-light`}>
-            <NavbarLi
-              key={refs[0].id}
-              text={refs[0]}
-              src={
-                user.img ? (
-                  <img
-                    alt={`acc_icon`}
-                    className={`rounded-md w-5 h-5 ml-3`}
-                    src={user.img}
-                  />
-                ) : (
-                  null
-                )
-              }
-            />
+            <NavbarLi key={refs[0].id} text={refs[0]}>
+              {user.img ? (
+                <img
+                  alt={`acc_icon`}
+                  className={`rounded-md w-5 h-5 ml-3`}
+                  src={user.img}
+                />
+              ) : null}
+            </NavbarLi>
+
             {refs.slice(2).map((ref) => (
               <NavbarLi key={ref.id} text={ref} />
             ))}

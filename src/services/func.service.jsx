@@ -1,4 +1,5 @@
 import QuotesColumn from "../ui/Quotes/QuotesColumn";
+
 export const FuncService = {
   getQuotesList(data, user, authors, width) {
     let list = [];
@@ -24,5 +25,17 @@ export const FuncService = {
       $(`#text${quote_id}`).height() >=
       125 - (window.location.href.includes(`authors`) ? 0 : 25)
     );
+  },
+  getList(data, type, user, id) {
+    switch (type) {
+      case `Цитаты`:
+        return user.id ? data?.filter((n) => !user.favorite.includes(n.id)) : data;
+      case `Избранные Цитаты`:
+        return data?.filter((n) => user.favorite.includes(n.id));
+      case `Цитаты автора`:
+        return data?.filter((n) => (n.author_id == id));
+      default:
+        return data;
+    }
   },
 };

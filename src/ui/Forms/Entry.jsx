@@ -72,10 +72,9 @@ const Entry = ({ setUser, setText }) => {
           <ClassicBtn
             type={`submit`}
             disabled={isSubmitting}
-            src={setUser ? `Войти` : `Зарегистрироваться`}
             rounded={`rounded-lg`}
-            color={setUser ? `bg-green` : `bg-blue`}
-          />
+            color={setUser ? `bg-green` : `bg-blue`}>{setUser ? `Войти` : `Зарегистрироваться`}</ClassicBtn>
+          
         </div>
       </form>
     </>

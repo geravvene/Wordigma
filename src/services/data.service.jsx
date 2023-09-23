@@ -8,6 +8,7 @@ let user;
 export const DataService = {
   async setUser(data) {
     user = data;
+    window.localStorage.setItem(`user`, JSON.stringify(user));
   },
   async getData(path) {
     return (await axiosInstanse.get(path).catch((err) => console.log(err)))
@@ -43,30 +44,33 @@ export const DataService = {
     if (
       (user.favorite.includes(id) && add) ||
       (!user.favorite.includes(id) && !add)
-    )return;
-
+    )
+      return;
+    user.favorite = add
+      ? user.favorite.concat([id])
+      : user.favorite.filter((num) => num !== id);
+    window.localStorage.setItem(`user`, JSON.stringify(user));
     return axiosInstanse
       .patch(`users/${user.id}`, {
         favorite: add
           ? user.favorite.concat([id])
           : user.favorite.filter((num) => num !== id),
       })
-      .catch((err) => console.log(err))
-      .then(async () => this.setUser(await this.getData(`users/${user.id}`)));
+      .catch((err) => console.log(err));
   },
   async clearFavoriteArray() {
     return axiosInstanse
-      .patch(`users/${user?.id}`, {
+      .patch(`users/${user.id}`, {
         favorite: [],
       })
       .catch((err) => console.log(err))
       .then(async () => this.setUser(await this.getData(`users/${user.id}`)));
   },
 
-  async getRecommendedQuotes(limit, page) {
+  async getRecommendedQuotes() {
     return !user.favorite
-      ? this.getData(`quotes?_limit=${limit}&_page=${page}`)
-      : (await this.getData(`quotes?_limit=10`)).filter(
+      ? this.getData(`quotes`)
+      : (await this.getData(`quotes`)).filter(
           (n) => !user.favorite.includes(n.id)
         );
   },

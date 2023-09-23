@@ -1,5 +1,5 @@
 import React from "react";
-import UpLink from "./UpLink";
+import UpLink from "../UpLink";
 
 const Author = ({ author }) => {
   return (
@@ -12,16 +12,15 @@ const Author = ({ author }) => {
         <UpLink
           name={author.name}
           path={`/authors/${author.id}`}
-          src={
-            <img
-              alt={`author image`}
-              className={`round h-full`}
-              src={author.img}
-            />
-          }
           height={`h-[10%]`}
           id={`author${author.id}`}
-        />
+        >
+          <img
+            alt={`author image`}
+            className={`round h-full`}
+            src={author.img}
+          />
+        </UpLink>
       </div>
     </>
   );

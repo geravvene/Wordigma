@@ -17,19 +17,18 @@ const Authorization = () => {
       <div className={`absolute h-full w-full flexcol`}>
         <div className={`grid12`}>
           <div className={`col-span-12 md:col-span-6`}>
-            <Title text={`Вход`} />
+            <Title>Вход</Title>
             <Entry setUser={setUser} setText={setText} />
           </div>
           <div className={`col-span-12 md:col-span-6`}>
-            <Title text={`Регистрация`} />
+            <Title>Регистрация</Title>
             <Entry setText={setText} />
           </div>
         </div>
         <div className={`h-full fullcenter flex`}>
-          <QuoteText
-            style={`text-center text-lg bg-gray-light p-3`}
-            text={text}
-          />
+          <QuoteText style={`text-center text-lg bg-gray-light p-3`}>
+            {text}
+          </QuoteText>
         </div>
       </div>
     </>

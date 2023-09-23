@@ -4,7 +4,7 @@ const ClassicBtn = ({
   disabled,
   func,
   arg,
-  src,
+  children,
   color,
   padding,
   rounded,
@@ -16,24 +16,14 @@ const ClassicBtn = ({
       <button
         type={type}
         onClick={() => func(arg) ?? null}
-        className={`flexcol items-center duration-150 w-full ${
-          color +
-          ` ` +
-          (device.mobile() ? `active:` : `hover:`) +
-          color +
-          `-light` +
-          ` ` +
-          (padding ?? `p-1.5`) +
-          ` ` +
-          (rounded ?? `rounded-md`) +
-          ` ` +
-          (shadow ?? `shadows`) +
-          ` ` +
-          className
-        }`}
+        className={`flexcol items-center duration-150 w-full ${color} ${
+          device.mobile() ? `active:` : `hover:`
+        }${color + `-light`} ${padding ?? `p-1.5`} ${rounded ?? `rounded-md`} ${
+          shadow ?? `shadows`
+        } ${className}`}
         disabled={disabled}
       >
-        {src}
+        {children}
       </button>
     </>
   );

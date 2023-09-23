@@ -4,7 +4,7 @@ const WikiFrame = ({ url }) => {
       <iframe
         src={url}
         width={`100%`}
-        height={`400vh`}
+        height={`300vh`}
         className={`round shadows`}
       />
     </>

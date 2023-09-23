@@ -1,11 +1,11 @@
-const QuoteText = ({ style, id, text }) => {
+const QuoteText = ({ style, id, children }) => {
   return (
     <>
       <div
         id={id}
         className={`italic flex hyphens-auto h-fit rounded-md ${style}`}
       >
-        {text}
+        {children}
       </div>
     </>
   );

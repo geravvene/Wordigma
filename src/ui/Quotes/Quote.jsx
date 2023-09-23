@@ -24,7 +24,7 @@ const Quote = ({ quote, author, user, openId, setOpenId, width }) => {
       setOpen({ ...open, wasOpen: true });
     } else {
       $(`#${quote.id}`).css({
-        height:`125px`,
+        height: `125px`,
       });
       setOpen({ ...open, wasOpen: false });
     }
@@ -35,7 +35,7 @@ const Quote = ({ quote, author, user, openId, setOpenId, width }) => {
     } else if (open.wasOpen) {
       $(`#text${quote.id}`).removeClass(`self-center`);
       $(`#${quote.id}`).css({
-        height:`125px`,
+        height: `125px`,
       });
       setOpen({ ...open, wasOpen: false });
       setOpen({ ...open, isOpen: false });
@@ -58,32 +58,31 @@ const Quote = ({ quote, author, user, openId, setOpenId, width }) => {
               : `mb-[25px]`
           }`}
         >
-          <QuoteText
-            style={`text-justify mr-2 ml-2`}
-            text={
-              <>
-                <p>"</p>
-                {quote.text}"
-              </>
-            }
-            id={`text${quote.id}`}
-          />
+          <QuoteText style={`text-justify mr-2 ml-2`} id={`text${quote.id}`}>
+            <p>"</p>
+            {quote.text}"
+          </QuoteText>
+
           <div className={`min-w-fit flex flex-col items-center`}>
             {user.name ? <FavoriteBtn quote_id={quote.id} /> : <></>}
 
             <div
               id={`more${quote.id}`}
-              className={`max-w-fit h-full items-center hidden ${user.name ? `` :`mr-1`}
-           `}>
+              className={`max-w-fit h-full items-center hidden ${
+                user.name ? `` : `mr-1`
+              }
+           `}
+            >
               <ClassicBtn
                 func={setOpenId}
                 arg={quote.id == openId ? null : quote.id}
                 padding={` `}
-                src={<VscChevronDown color="white" />}
                 rounded={`round`}
                 shadow={`shadow-black shadow`}
                 color={`bg-gray`}
-              />
+              >
+                <VscChevronDown color="white"/>
+              </ClassicBtn>
             </div>
           </div>
         </div>

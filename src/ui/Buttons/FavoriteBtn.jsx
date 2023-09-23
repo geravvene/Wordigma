@@ -32,21 +32,19 @@ const FavoriteBtn = ({ quote_id }) => {
     <>
       <ClassicBtn
         func={mutate}
-        src={
-          favorite ? (
-            <VscHeartFilled size={`1.25rem`} color="white" />
-          ) : (
-            <VscHeart size={`1.25rem`} color="white" />
-          )
-        }
         rounded={`rounded-tr-md rounded-bl-xl`}
         shadow={`shadow shadow-black`}
         color={
           favorite
             ? `bg-green`
             : `bg-blue`
-        }
-      />
+        }>{
+          favorite ? (
+            <VscHeartFilled size={`1.25rem`} color="white" />
+          ) : (
+            <VscHeart size={`1.25rem`} color="white" />
+          )
+        }</ClassicBtn>
     </>
   );
 };

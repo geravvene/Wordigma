@@ -45,12 +45,13 @@ const Header = () => {
           {device.mobile() ? (
             <div>
               <ClassicBtn
-                src={<VscThreeBars color="#a9a9a9" />}
                 func={setIsNavActive}
                 arg={!isNavActive}
                 shadow={`shadow shadow-black`}
                 color={isNavActive ? `bg-gray-light` : `bg-gray`}
-              />
+              >
+                <VscThreeBars color="#a9a9a9" />
+              </ClassicBtn>
             </div>
           ) : (
             <div
