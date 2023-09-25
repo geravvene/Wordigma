@@ -74,11 +74,7 @@ export const DataService = {
           (n) => !user.favorite.includes(n.id)
         );
   },
-
-  async checkFavorite(id) {
-    return user.favorite.includes(id);
-  },
-
+  
   async checkAuthorization(data, setUser, setText) {
     const acc = (await DataService.getData(`users?name=${data.username}`))[0];
     return acc

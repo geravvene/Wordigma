@@ -15,11 +15,7 @@ const Author = ({ author }) => {
           height={`h-[10%]`}
           id={`author${author.id}`}
         >
-          <img
-            alt={`author image`}
-            className={`round h-full`}
-            src={author.img}
-          />
+          <img alt={`author image`} className={`round h-full`} src={author.img} />
         </UpLink>
       </div>
     </>

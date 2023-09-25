@@ -5,9 +5,9 @@ import { FuncService } from "../../services/func.service";
 
 const sorts = [`Длина больше`, `Длина меньше`];
 
-const QuotesList = () => {
-  const { data, isLoading, isFetching } = useQuery([`quotes`], () =>
-    DataService.getRecommendedQuotes()
+const FavoriteQuotesList = () => {
+  const { data, isLoading, isFetching } = useQuery([`fav quotes`], () =>
+    DataService.getFavoriteQuotes()
   );
   const {
     data: authors,
@@ -19,18 +19,18 @@ const QuotesList = () => {
       DataService.getFilteredByArrayData(`authors`, `id`, [
         ...new Set(FuncService.getPropertyArray(data, `author_id`)),
       ]),
-    { enabled: !!data }
+    { enabled: !!data}
   );
   return (
     <>
       <Quotes
         data={data}
         authors={authors}
-        title={`Цитаты`}
+        title={`Избранные цитаты`}
         loading={[isFetching, isLoading, isFetching2, isLoading2]}
         sorts={sorts}
       />
     </>
   );
 };
-export default QuotesList;
+export default FavoriteQuotesList;

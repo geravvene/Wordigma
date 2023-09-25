@@ -1,22 +1,20 @@
 import logo from "../../assets/logo.png";
 import Navbar from "./Navbar.jsx";
 import { useRef, useState } from "react";
-import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import ClassicBtn from "../Buttons/ClassicBtn";
 import { VscThreeBars } from "react-icons/vsc";
 import device from "current-device";
 
 const refs = [
-  { id: 1, value: `Профиль`, href: `acc` },
-  { id: 2, value: `Авторизация`, href: `reg` },
-  { id: 3, value: `Рекомендации`, href: `rec` },
-  { id: 4, value: `Авторы`, href: `authors` },
+  { value: `Авторизация`, href: `reg` },
+  { value: `Профиль`, href: `acc` },
+  { value: `Рекомендации`, href: `rec` },
+  { value: `Авторы`, href: `authors` },
 ];
 
 const Header = () => {
   const [isNavActive, setIsNavActive] = useState(false);
-  const location = useLocation();
   const head = useRef(null);
   useEffect(() => {
     $(window).scroll(function () {
@@ -65,9 +63,9 @@ const Header = () => {
           )}
           <div className={`font-bold`}>
             {refs
-              .filter((ref) => location.pathname.includes(ref.href))
+              .filter((ref) => window.location.href.includes(ref.href))
               .map((ref) => (
-                <p key={ref.id}>{ref.value}</p>
+                <p key={ref.value}>{ref.value}</p>
               ))}
           </div>
           <img alt={`uroboros logo`} className={`w-7`} src={logo} />

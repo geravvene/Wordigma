@@ -6,6 +6,7 @@ import ClassicBtn from "./ClassicBtn";
 import { useMutation } from "react-query";
 import { VscHeart } from "react-icons/vsc";
 import { VscHeartFilled } from "react-icons/vsc";
+import { FuncService } from "../../services/func.service";
 
 const FavoriteBtn = ({ quote_id }) => {
   const [favorite, setFavorite] = useState();
@@ -15,7 +16,7 @@ const FavoriteBtn = ({ quote_id }) => {
         ? setFavorite(true)
         : window.location.href.includes("rec")
         ? setFavorite(false)
-        : setFavorite(await DataService.checkFavorite(quote_id));
+        : setFavorite(FuncService.checkFavorite(quote_id));
     };
     fetchData();
   }, []);
@@ -34,17 +35,14 @@ const FavoriteBtn = ({ quote_id }) => {
         func={mutate}
         rounded={`rounded-tr-md rounded-bl-xl`}
         shadow={`shadow shadow-black`}
-        color={
-          favorite
-            ? `bg-green`
-            : `bg-blue`
-        }>{
-          favorite ? (
-            <VscHeartFilled size={`1.25rem`} color="white" />
-          ) : (
-            <VscHeart size={`1.25rem`} color="white" />
-          )
-        }</ClassicBtn>
+        color={favorite ? `bg-green` : `bg-blue`}
+      >
+        {favorite ? (
+          <VscHeartFilled size={`1.25rem`} color="white" />
+        ) : (
+          <VscHeart size={`1.25rem`} color="white" />
+        )}
+      </ClassicBtn>
     </>
   );
 };

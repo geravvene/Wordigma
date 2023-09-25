@@ -1,22 +1,4 @@
-import QuotesColumn from "../ui/Quotes/QuotesColumn";
-
 export const FuncService = {
-  getQuotesList(data, user, authors, width) {
-    let list = [];
-    let amount = width >= 1024 ? 3 : width >= 640 ? 2 : 1;
-    for (let i = 0; i < amount; i++) {
-      list.push(
-        <QuotesColumn
-          key={i}
-          authors={authors}
-          data={data.filter((item, index) => !((index + amount - i) % amount))}
-          user={user}
-          width={width}
-        />
-      );
-    }
-    return list;
-  },
   getPropertyArray(data, property) {
     return data.map((item) => item[property]);
   },
@@ -26,16 +8,35 @@ export const FuncService = {
       125 - (window.location.href.includes(`authors`) ? 0 : 25)
     );
   },
-  getList(data, type, user, id) {
-    switch (type) {
-      case `Цитаты`:
-        return user.id ? data?.filter((n) => !user.favorite.includes(n.id)) : data;
-      case `Избранные Цитаты`:
-        return data?.filter((n) => user.favorite.includes(n.id));
-      case `Цитаты автора`:
-        return data?.filter((n) => (n.author_id == id));
+  getFilter(n, filter) {
+    switch (filter) {
+      case `Избранное`:
+        return JSON.parse(
+          window.localStorage.getItem(`user`)
+        ).favorite.includes(n.id);
+      case `Неизбранное`:
+        return !JSON.parse(
+          window.localStorage.getItem(`user`)
+        ).favorite.includes(n.id);
       default:
-        return data;
+        return true;
     }
+  },
+  getSort(a, b, sort) {
+    switch (sort) {
+      case `Длина больше`:
+        return b.text.length - a.text.length;
+      case `Длина меньше`:
+        return a.text.length - b.text.length;
+      case `По алфавиту`:
+        return a.name.localeCompare(b.name);
+      default:
+        return 0;
+    }
+  },
+  checkFavorite(id) {
+    return JSON.parse(window.localStorage.getItem(`user`)).favorite.includes(
+      id
+    );
   },
 };

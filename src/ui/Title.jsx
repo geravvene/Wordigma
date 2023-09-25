@@ -1,9 +1,10 @@
-const Title = ({ children }) => {
+const Title = ({ children, text }) => {
   return (
     <>
       <h1
-        className={`text-xl font-bold tracking-widest border-b-2 pb-3 border-gray-light`}
+        className={`relative border-b-2 pb-3 border-gray-light`}
       >
+        <div className={`text-xl font-bold tracking-widest`}>{text}</div>
         {children}
       </h1>
     </>

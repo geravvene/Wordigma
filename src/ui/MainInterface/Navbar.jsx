@@ -1,8 +1,11 @@
 import { useAuth } from "../../hooks/useAuth";
-import NavbarLi from "./NavbarLi";
+import LiOption from "../LiOption";
+import { useNavigate } from "react-router-dom";
+import UlMenu from "../UlMenu";
 
 const Navbar = ({ isActive, setIsActive, refs }) => {
   const { user } = useAuth();
+  const navigate = useNavigate();
   return (
     <>
       <div
@@ -11,23 +14,32 @@ const Navbar = ({ isActive, setIsActive, refs }) => {
           setIsActive(false);
         }}
       >
-        <ul className={`p-3 text-left`}>
-          <div className={`border-t-2 border-gray-light`}>
-            <NavbarLi key={refs[0].id} text={refs[0]}>
-              {user.img ? (
-                <img
-                  alt={`acc_icon`}
-                  className={`rounded-md w-5 h-5 ml-3`}
-                  src={user.img}
-                />
-              ) : null}
-            </NavbarLi>
-
-            {refs.slice(2).map((ref) => (
-              <NavbarLi key={ref.id} text={ref} />
-            ))}
-          </div>
-        </ul>
+        <UlMenu>
+          <LiOption
+            focus={window.location.href.includes(refs[1].href)}
+            func={navigate}
+            arg={refs[1].href}
+          >
+            {refs[1].value}
+            {user.img ? (
+              <img
+                alt={`acc_icon`}
+                className={`rounded-md w-5 h-5 ml-3`}
+                src={user.img}
+              />
+            ) : null}
+          </LiOption>
+          {refs.slice(2).map((ref) => (
+            <LiOption
+              key={ref.value}
+              focus={window.location.href.includes(ref.href)}
+              func={navigate}
+              arg={ref.href}
+            >
+              {ref.value}
+            </LiOption>
+          ))}
+        </UlMenu>
       </div>
     </>
   );

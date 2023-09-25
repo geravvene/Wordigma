@@ -1,23 +1,21 @@
 import { DataService } from "../../services/data.service";
-import List from "../List";
-import Author from "./Author";
+import Authors from "./Authors";
 import { useQuery } from "react-query";
 
-const AuthorList = ({ title }) => {
+const sorts = [`По алфавиту`];
+
+const AuthorList = () => {
   const { data, isLoading, isFetching } = useQuery([`authors`], () =>
     DataService.getData(`authors`)
   );
   return (
     <>
-      <List
+      <Authors
         data={data}
-        title={title}
+        title={`Авторы`}
         loading={[isFetching, isLoading]}
-      >
-        {data?.map((author) => (
-          <Author key={author.id} author={author} />
-        ))}
-      </List>
+        sorts={sorts}
+      />
     </>
   );
 };

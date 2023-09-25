@@ -2,7 +2,7 @@ import Title from "../ui/Title.jsx";
 import { DataService } from "../services/data.service.jsx";
 import { useMutation } from "react-query";
 import ClassicBtn from "../ui/Buttons/ClassicBtn.jsx";
-import QuotesList from "../ui/Quotes/QuotesList.jsx";
+import FavoriteQuotesList from "../ui/Quotes/FavoriteQuotesList.jsx";
 import { useQueryClient } from "react-query";
 import { useAuth } from "../hooks/useAuth.jsx";
 import { Navigate } from "react-router-dom";
@@ -14,7 +14,7 @@ const Profile = () => {
     [`create acc`],
     () => DataService.clearFavoriteArray(),
     {
-      onSuccess: () => queryClient.invalidateQueries(`quotes`),
+      onSuccess: () => queryClient.invalidateQueries(`fav quotes`),
     }
   );
 
@@ -22,7 +22,7 @@ const Profile = () => {
     <Navigate to="/reg" />
   ) : (
     <>
-      <Title>{user.name}</Title>
+      <Title text={user.name}></Title>
       <div className={`content`}>
         <div className={`flex justify-between w-fit gap-3`}>
           <img
@@ -45,7 +45,7 @@ const Profile = () => {
             </ClassicBtn>
           </div>
         </div>
-        <QuotesList title={`Избранные Цитаты`} />
+        <FavoriteQuotesList/>
       </div>
     </>
   );
