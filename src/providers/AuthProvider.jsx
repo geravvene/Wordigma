@@ -10,9 +10,9 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(
     JSON.parse(window.localStorage.getItem(`user`))
   );
-  const { data, isLoading, isFetching } = useQuery(
+  const { data } = useQuery(
     [`user`],
-    () => DataService.getData(`/users/65131514e9079cb1fd964685`),
+    () => DataService.getData(`/users/${user._id}`),
     {
       retry: 1,
       enabled: JSON.stringify(user) != "{}",
@@ -20,7 +20,6 @@ const AuthProvider = ({ children }) => {
   );
   useEffect(() => {
     if (!user) return;
-    DataService.setUser(user);
     window.localStorage.setItem(`user`, JSON.stringify(user));
   }, [user]);
   useEffect(() => {

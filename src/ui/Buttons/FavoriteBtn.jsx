@@ -22,9 +22,17 @@ const FavoriteBtn = ({ quote, user }) => {
   }, []);
   const { mutate } = useMutation(
     [`update favorite`],
-    () => DataService.updateData(`users/${user._id}/array/${!favorite ? `add` : `del`}/favorite`, quote),
+    () =>
+      DataService.updateData(
+        `users/${user._id}/array/${!favorite ? `add` : `del`}/favorite`,
+        quote
+      ),
     {
-      onMutate: () => {
+      onMutate: async () => {
+        FuncService.UpdateLocalFavorite(
+          `${!favorite ? `add` : `del`}`,
+          quote._id
+        );
         setFavorite(!favorite);
       },
     }

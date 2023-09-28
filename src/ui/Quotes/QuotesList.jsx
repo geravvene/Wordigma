@@ -20,6 +20,7 @@ const QuotesList = ({ title, author }) => {
         sorts={types.get(title)?.sorts}
         filters={types.get(title)?.filters}
         user={user}
+        search={"text"}
       />
     </>
   );

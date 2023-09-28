@@ -6,7 +6,7 @@
   @apply border-gray-light flex flex-col gap-3 mt-3 pl-3 border-l-2;
 }
 .input {
-  @apply bg-gray-dark p-1 rounded-md;
+  @apply bg-gray-dark p-1 rounded-md text-sm;
   outline: none;
 }
 .error {

@@ -6,15 +6,19 @@ import QuotesList from "../ui/Quotes/QuotesList.jsx";
 import { useQueryClient } from "react-query";
 import { useAuth } from "../hooks/useAuth.jsx";
 import { Navigate } from "react-router-dom";
+import { FuncService } from "../services/func.service.jsx";
 
 const Profile = () => {
   const { user, setUser } = useAuth();
   const queryClient = useQueryClient();
   const { mutate } = useMutation(
     [`create acc`],
-    () => DataService.updateData(`users/${user._id}/delete/array/favorite`),
+    () => DataService.updateData(`users/${user._id}/clear/array/favorite`),
     {
-      onSuccess: () => queryClient.invalidateQueries(`Избранные цитаты`),
+      onSuccess: async () => {
+        queryClient.invalidateQueries(`Избранные цитаты`);
+        FuncService.UpdateLocalFavorite(`clear`);
+      },
     }
   );
 

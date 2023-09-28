@@ -33,7 +33,7 @@ export default function Controller(app, db) {
       res.sendStatus(500);
     }
   });
-  app.put("/:col/:id/delete/array/:property", async (req, res) => {
+  app.put("/:col/:id/clear/array/:property", async (req, res) => {
     try {
       res.send(
         await db.collection(req.params.col).updateOne(
