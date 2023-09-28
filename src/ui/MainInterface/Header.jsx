@@ -13,24 +13,26 @@ const refs = [
   { value: `Авторы`, href: `authors` },
 ];
 
+const HeaderPositionController = (head) => {
+  $(window).scroll(function () {
+    if ($(this).scrollTop() > 1) {
+      head.current.classList.add(`fixed`);
+      $(`main`).css({
+        paddingTop: head.current.getBoundingClientRect().height + `px`,
+      });
+    } else {
+      head.current.classList.remove(`fixed`);
+      $(`main`).css({
+        paddingTop: ``,
+      });
+    }
+  });
+};
+
 const Header = () => {
   const [isNavActive, setIsNavActive] = useState(false);
   const head = useRef(null);
-  useEffect(() => {
-    $(window).scroll(function () {
-      if ($(this).scrollTop() > 1) {
-        head.current.classList.add(`fixed`);
-        $(`main`).css({
-          paddingTop: head.current.getBoundingClientRect().height + `px`,
-        });
-      } else {
-        head.current.classList.remove(`fixed`);
-        $(`main`).css({
-          paddingTop: ``,
-        });
-      }
-    });
-  }, []);
+  useEffect(() => HeaderPositionController(head), []);
 
   return (
     <>

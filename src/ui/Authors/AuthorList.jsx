@@ -8,7 +8,10 @@ const AuthorList = () => {
   const { data, isLoading, isFetching } = useQuery([`authors`], () =>
     DataService.getData(`authors`)
   );
-  return (
+
+  return isLoading || isFetching ? (
+    <p>Loading...</p>
+  ) : (
     <>
       <Authors
         data={data}

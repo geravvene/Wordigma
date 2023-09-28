@@ -15,7 +15,7 @@ const ClassicBtn = ({
     <>
       <button
         type={type}
-        onClick={() => func(arg) ?? null}
+        onClick={() => (func ? func(arg) : null)}
         className={`relative flexcol fullcenter duration-150 w-full ${color} ${
           device.mobile() ? `active:` : `hover:`
         }${color + `-light`} ${padding ?? `p-1.5`} ${rounded ?? `rounded-md`} ${

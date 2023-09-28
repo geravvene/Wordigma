@@ -2,7 +2,7 @@ import Title from "../ui/Title.jsx";
 import { DataService } from "../services/data.service.jsx";
 import { useMutation } from "react-query";
 import ClassicBtn from "../ui/Buttons/ClassicBtn.jsx";
-import FavoriteQuotesList from "../ui/Quotes/FavoriteQuotesList.jsx";
+import QuotesList from "../ui/Quotes/QuotesList.jsx";
 import { useQueryClient } from "react-query";
 import { useAuth } from "../hooks/useAuth.jsx";
 import { Navigate } from "react-router-dom";
@@ -12,9 +12,9 @@ const Profile = () => {
   const queryClient = useQueryClient();
   const { mutate } = useMutation(
     [`create acc`],
-    () => DataService.clearFavoriteArray(),
+    () => DataService.updateData(`users/${user._id}/delete/array/favorite`),
     {
-      onSuccess: () => queryClient.invalidateQueries(`fav quotes`),
+      onSuccess: () => queryClient.invalidateQueries(`Избранные цитаты`),
     }
   );
 
@@ -45,7 +45,7 @@ const Profile = () => {
             </ClassicBtn>
           </div>
         </div>
-        <FavoriteQuotesList/>
+        <QuotesList title={`Избранные цитаты`} />
       </div>
     </>
   );

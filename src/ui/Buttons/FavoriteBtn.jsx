@@ -8,7 +8,7 @@ import { VscHeart } from "react-icons/vsc";
 import { VscHeartFilled } from "react-icons/vsc";
 import { FuncService } from "../../services/func.service";
 
-const FavoriteBtn = ({ quote_id }) => {
+const FavoriteBtn = ({ quote, user }) => {
   const [favorite, setFavorite] = useState();
   useEffect(() => {
     const fetchData = async () => {
@@ -16,13 +16,13 @@ const FavoriteBtn = ({ quote_id }) => {
         ? setFavorite(true)
         : window.location.href.includes("rec")
         ? setFavorite(false)
-        : setFavorite(FuncService.checkFavorite(quote_id));
+        : setFavorite(FuncService.checkFavorite(quote._id));
     };
     fetchData();
   }, []);
   const { mutate } = useMutation(
     [`update favorite`],
-    () => DataService.patchFavoriteArray(!favorite, quote_id),
+    () => DataService.updateData(`users/${user._id}/array/${!favorite ? `add` : `del`}/favorite`, quote),
     {
       onMutate: () => {
         setFavorite(!favorite);

@@ -2,7 +2,7 @@ import { withList } from "../../HOCs/withList";
 import useResize from "../../hooks/useResize";
 import QuotesColumn from "./QuotesColumn";
 
-const Quotes = ({ authors, data, user }) => {
+const Quotes = ({ data, user }) => {
   const width = useResize();
   let list = [];
   let amount = width >= 1024 ? 3 : width >= 640 ? 2 : 1;
@@ -10,7 +10,6 @@ const Quotes = ({ authors, data, user }) => {
     list.push(
       <QuotesColumn
         key={i}
-        authors={authors}
         data={data.filter((item, index) => !((index + amount - i) % amount))}
         user={user}
         width={width}

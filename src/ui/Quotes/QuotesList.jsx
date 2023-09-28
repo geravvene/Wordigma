@@ -1,34 +1,25 @@
 import { DataService } from "../../services/data.service";
 import { useQuery } from "react-query";
 import Quotes from "./Quotes";
-import { FuncService } from "../../services/func.service";
+import { useAuth } from "../../hooks/useAuth";
+import {types} from "./QuotesListTypes.js";
 
-const sorts = [`Длина больше`, `Длина меньше`];
-
-const QuotesList = () => {
-  const { data, isLoading, isFetching } = useQuery([`quotes`], () =>
-    DataService.getRecommendedQuotes()
-  );
-  const {
-    data: authors,
-    isLoading: isLoading2,
-    isFetching: isFetching2,
-  } = useQuery(
-    [`authors filter ${data}`],
-    () =>
-      DataService.getFilteredByArrayData(`authors`, `id`, [
-        ...new Set(FuncService.getPropertyArray(data, `author_id`)),
-      ]),
-    { enabled: !!data }
+const QuotesList = ({ title, author }) => {
+  const { user } = useAuth();
+  const { data, isLoading, isFetching } = useQuery(
+    [title],
+    () => DataService.getData(types.get(title).path(user)),
+    { enabled: !author }
   );
   return (
     <>
       <Quotes
-        data={data}
-        authors={authors}
-        title={`Цитаты`}
-        loading={[isFetching, isLoading, isFetching2, isLoading2]}
-        sorts={sorts}
+        data={data ?? author?.quotes}
+        title={title}
+        loading={[isFetching, isLoading]}
+        sorts={types.get(title)?.sorts}
+        filters={types.get(title)?.filters}
+        user={user}
       />
     </>
   );

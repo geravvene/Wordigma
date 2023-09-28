@@ -3,52 +3,62 @@ import { useState } from "react";
 import { VscChevronDown } from "react-icons/vsc";
 import ClassicBtn from "../Buttons/ClassicBtn";
 import { useEffect } from "react";
-import { FuncService } from "../../services/func.service";
 import UpLink from "../UpLink";
 import QuoteText from "./QuoteText";
 
-const Quote = ({ quote, author, user, openId, setOpenId, width }) => {
+const isTextOverflow = (quote_id) => {
+  return (
+    $(`#text${quote_id}`).height() >=
+    125 - (window.location.href.includes(`authors`) ? 0 : 25)
+  );
+};
+const QuoteSizeController = (quote_id, open, setOpen, width) => {
+  if (open.isOpen && !open.wasOpen) {
+    $(`#${quote_id}`).css({
+      height:
+        $(`#text${quote_id}`).height() +
+        (window.location.href.includes(`authors`) ? 5 : 30) +
+        `px`,
+    });
+    setOpen({ ...open, wasOpen: true });
+  } else {
+    $(`#${quote_id}`).css({
+      height: `125px`,
+    });
+    setOpen({ ...open, wasOpen: false });
+  }
+  if (isTextOverflow(quote_id, width)) {
+    $(`#text${quote_id}`).removeClass(`self-center`);
+    $(`#more${quote_id}`).removeClass(`hidden`);
+    $(`#more${quote_id}`).addClass(`flex`);
+  } else if (open.wasOpen) {
+    $(`#text${quote_id}`).removeClass(`self-center`);
+    $(`#${quote_id}`).css({
+      height: `125px`,
+    });
+    setOpen({ ...open, wasOpen: false });
+    setOpen({ ...open, isOpen: false });
+  } else {
+    $(`#text${quote_id}`).addClass(`self-center`);
+    $(`#more${quote_id}`).removeClass(`flex`);
+    $(`#more${quote_id}`).addClass(`hidden`);
+  }
+};
+
+const Quote = ({ quote, user, openId, setOpenId, width }) => {
   const [open, setOpen] = useState({ isOpen: false, wasOpen: false });
   useEffect(() => {
-    if (openId != quote.id) setOpen({ ...open, isOpen: false });
+    if (openId != quote._id) setOpen({ ...open, isOpen: false });
     else setOpen({ ...open, isOpen: true });
   }, [openId]);
-  useEffect(() => {
-    if (open.isOpen && !open.wasOpen) {
-      $(`#${quote.id}`).css({
-        height:
-          $(`#text${quote.id}`).height() +
-          (window.location.href.includes(`authors`) ? 5 : 30) +
-          `px`,
-      });
-      setOpen({ ...open, wasOpen: true });
-    } else {
-      $(`#${quote.id}`).css({
-        height: `125px`,
-      });
-      setOpen({ ...open, wasOpen: false });
-    }
-    if (FuncService.isTextOverflow(quote.id, width)) {
-      $(`#text${quote.id}`).removeClass(`self-center`);
-      $(`#more${quote.id}`).removeClass(`hidden`);
-      $(`#more${quote.id}`).addClass(`flex`);
-    } else if (open.wasOpen) {
-      $(`#text${quote.id}`).removeClass(`self-center`);
-      $(`#${quote.id}`).css({
-        height: `125px`,
-      });
-      setOpen({ ...open, wasOpen: false });
-      setOpen({ ...open, isOpen: false });
-    } else {
-      $(`#text${quote.id}`).addClass(`self-center`);
-      $(`#more${quote.id}`).removeClass(`flex`);
-      $(`#more${quote.id}`).addClass(`hidden`);
-    }
-  }, [open.isOpen, width]);
+  useEffect(
+    () => QuoteSizeController(quote._id, open, setOpen, width),
+    [open.isOpen, width]
+  );
   return (
     <>
       <div
-        id={`${quote.id}`}
+        id={`${quote._id}`}
         className={`duration-100 flexcol justify-between bg-gray-light round shadows w-full h-[125px]`}
       >
         <div
@@ -58,16 +68,16 @@ const Quote = ({ quote, author, user, openId, setOpenId, width }) => {
               : `mb-[25px]`
           }`}
         >
-          <QuoteText style={`text-justify mr-2 ml-2`} id={`text${quote.id}`}>
+          <QuoteText style={`text-justify mr-2 ml-2`} id={`text${quote._id}`}>
             <p>"</p>
             {quote.text}"
           </QuoteText>
 
           <div className={`min-w-fit flex flex-col items-center`}>
-            {user.name ? <FavoriteBtn quote_id={quote.id} /> : <></>}
+            {user.name ? <FavoriteBtn quote={quote} user={user} /> : <></>}
 
             <div
-              id={`more${quote.id}`}
+              id={`more${quote._id}`}
               className={`max-w-fit h-full items-center hidden ${
                 user.name ? `` : `mr-1`
               }
@@ -75,13 +85,13 @@ const Quote = ({ quote, author, user, openId, setOpenId, width }) => {
             >
               <ClassicBtn
                 func={setOpenId}
-                arg={quote.id == openId ? null : quote.id}
+                arg={quote._id == openId ? null : quote._id}
                 padding={` `}
                 rounded={`round`}
                 shadow={`shadow-black shadow`}
                 color={`bg-gray`}
               >
-                <VscChevronDown color="white"/>
+                <VscChevronDown color="white" />
               </ClassicBtn>
             </div>
           </div>
@@ -89,8 +99,8 @@ const Quote = ({ quote, author, user, openId, setOpenId, width }) => {
         {!window.location.href.includes(`authors`) ? (
           <>
             <UpLink
-              name={author.name}
-              path={`/authors/${quote.author_id}`}
+              name={quote.author.name}
+              path={`/authors/${quote.author._id}`}
               height={`h-[25px] hover:h-[40px]`}
             />
           </>

@@ -17,7 +17,7 @@ const Router = () => {
           <Routes>
             <Route element={<Navigate to="/reg" />} path={`/`} />
             <Route element={<Authorization />} path={`/reg`} />
-            <Route element={<QuotesList />} path={`/rec`} />
+            <Route element={<QuotesList title={"Цитаты"}/>} path={`/rec`} />
             <Route element={<AuthorList />} path={`/authors`} />
             <Route element={<AuthorPage />} path={`/authors/:id`} />
             <Route element={<Profile />} path={`/acc`} />
