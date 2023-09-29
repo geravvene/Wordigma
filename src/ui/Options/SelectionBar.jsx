@@ -9,7 +9,7 @@ const SelectionBar = ({ sorts, filters, fltr, setFilter, srt, setSort }) => {
   return (
     <>
       <div
-        className={`absolute -top-0 right-0 z-10 round ${
+        className={`absolute top-[0.15rem] right-0 z-10 round ${
           active ? `bg-gray-dark` : ``
         }`}
       >

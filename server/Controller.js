@@ -2,8 +2,23 @@ import { ObjectId } from "bson";
 //import jsonauthors from "./Wordigma.authors.json" assert { type: "json" };
 
 export default function Controller(app, db) {
+  app.get("/:col/filter/:filter", async (req, res) => {
+    try {
+      console.log("sdasdas");
+      res.send(
+        await db
+          .collection(req.params.col)
+          .find(JSON.parse(req.params.filter))
+          .toArray()
+      );
+    } catch (err) {
+      console.log(err);
+      res.sendStatus(500);
+    }
+  });
   app.get("/quotes/:mode/:id", async (req, res) => {
     try {
+      console.log("ffff");
       res.send(
         await db
           .collection("quotes")
@@ -24,9 +39,37 @@ export default function Controller(app, db) {
       res.sendStatus(500);
     }
   });
-  app.post("/:col", async (req, res) => {
+  app.post("/quotes", async (req, res) => {
     try {
       console.log("ddddd");
+      const id = new ObjectId();
+      await db.collection("authors").updateOne(
+        { _id: new ObjectId(req.body.author._id) },
+        {
+          $addToSet: {
+            quotes: { _id: id, text: req.body.text },
+          },
+        }
+      );
+      res.send(
+        await db
+          .collection("quotes")
+          .insertOne({
+            _id: id,
+            text: req.body.text,
+            author: {
+              ...req.body.author,
+              _id: new ObjectId(req.body.author._id),
+            },
+          })
+      );
+    } catch (err) {
+      console.log(err);
+      res.sendStatus(500);
+    }
+  });
+  app.post("/:col", async (req, res) => {
+    try {
       res.send(await db.collection(req.params.col).insertOne(req.body));
     } catch (err) {
       console.log(err);

@@ -7,6 +7,7 @@ import { useQueryClient } from "react-query";
 import { useAuth } from "../hooks/useAuth.jsx";
 import { Navigate } from "react-router-dom";
 import { FuncService } from "../services/func.service.jsx";
+import { Link } from "react-router-dom";
 
 const Profile = () => {
   const { user, setUser } = useAuth();
@@ -47,6 +48,18 @@ const Profile = () => {
             <ClassicBtn func={mutate} rounded={`rounded-lg`} color={`bg-blue`}>
               Очистить избранное
             </ClassicBtn>
+          </div>
+          
+          <div className={`flexcol justify-between pb-[0.1rem] `}>
+            <Link to={`/create`}>
+              <ClassicBtn
+                rounded={`rounded-md`}
+                color={`bg-green`}
+                className={`w-full`}
+              >
+                Создать
+              </ClassicBtn>
+            </Link>
           </div>
         </div>
         <QuotesList title={`Избранные цитаты`} />

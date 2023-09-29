@@ -17,12 +17,10 @@ const Authorization = () => {
       <div className={`absolute h-full w-full flexcol`}>
         <div className={`grid12`}>
           <div className={`col-span-12 md:col-span-6`}>
-            <Title>Вход</Title>
-            <Entry setUser={setUser} setText={setText} />
+            <Entry setUser={setUser} setText={setText} text={"Вход"} />
           </div>
           <div className={`col-span-12 md:col-span-6`}>
-            <Title>Регистрация</Title>
-            <Entry setText={setText} />
+            <Entry setText={setText} text={"Регистрация"} />
           </div>
         </div>
         <div className={`h-full fullcenter flex`}>

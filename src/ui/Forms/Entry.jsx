@@ -1,72 +1,47 @@
-import { useForm } from "react-hook-form";
-import ClassicBtn from "../Buttons/ClassicBtn";
-import { useMutation } from "react-query";
-import { DataService } from "../../services/data.service";
 import { FuncService } from "../../services/func.service";
 import Input from "./Input";
+import Form from "./Form";
+import { withForm } from "../../HOCs/withForm";
 
-async function checkAuthorization(acc, setUser, setText) {
+async function checkAuthorization(acc) {
   FuncService.checkExistence(
-    `users/filter/${JSON.stringify({ name: acc.username })}`
+    `users/filter/${JSON.stringify({ name: acc.data.username })}`
   ).then((data) => {
     data
-      ? data[0].password == acc.password
-        ? setUser(data[0])
-        : setText(`Неверный пароль`)
-      : setText(`Пользователь не найден`);
-  });
-}
-async function postUserRegistrationData(acc) {
-  if (
-    await FuncService.checkExistence(
-      `users/filter/${JSON.stringify({ name: acc.username })}`
-    )
-  )
-    throw new Error("Имя занято");
-  return await DataService.postData(`users`, {
-    name: acc.username,
-    password: acc.password,
-    favorite: [],
-    img: `https://conceptwindows.com.au/wp-content/uploads/no-profile-pic-icon-27.png`,
+      ? data[0].password == acc.data.password
+        ? acc.arg.setUser(data[0])
+        : acc.arg.setText(`Неверный пароль`)
+      : acc.arg.setText(`Пользователь не найден`);
   });
 }
 
-const Entry = ({ setUser, setText }) => {
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { isSubmitting, errors },
-  } = useForm({ mode: `onChange`, criteriaMode: "all" });
-  const { mutate } = useMutation(
-    [`create acc`],
-    async (data) => await postUserRegistrationData(data),
-    {
-      onSuccess: () => {
-        setText(`Вы успешно зарегистрировались`);
-        reset();
-      },
-      onError: (error) => {
-        setText(error.message);
-        reset();
-      },
-    }
-  );
-
+const Entry = ({
+  isSubmitting,
+  handleSubmit,
+  mutate,
+  errors,
+  register,
+  setUser,
+  setText,
+}) => {
   return (
     <>
-      <form
-        onSubmit={handleSubmit(
+      <Form
+        func={setUser ? checkAuthorization : mutate}
+        arg={
           setUser
-            ? async (data) => await checkAuthorization(data, setUser, setText)
-            : mutate
-        )}
-        className={`grid12-3 content`}
+            ? { setUser, setText }
+            : { path: "users", check: "name"}
+        }
+        color={setUser ? `bg-green` : `bg-blue`}
+        text={setUser ? `Войти` : `Зарегистрироваться`}
+        isSubmitting={isSubmitting}
+        handleSubmit={handleSubmit}
       >
         <div className={`flexcol w-full col-span-6 gap-3`}>
           <Input
-            name={`username`}
-            register={register(`username`, {
+            name={`name`}
+            register={register(`name`, {
               required: `Имя необходимо`,
               minLength: {
                 value: 4,
@@ -97,18 +72,8 @@ const Entry = ({ setUser, setText }) => {
             errors={errors}
           />
         </div>
-        <div className={`col-span-6 col-start-4`}>
-          <ClassicBtn
-            type={`submit`}
-            disabled={isSubmitting}
-            rounded={`rounded-lg`}
-            color={setUser ? `bg-green` : `bg-blue`}
-          >
-            {setUser ? `Войти` : `Зарегистрироваться`}
-          </ClassicBtn>
-        </div>
-      </form>
+      </Form>
     </>
   );
 };
-export default Entry;
+export default withForm(Entry);

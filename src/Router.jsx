@@ -8,6 +8,7 @@ import Profile from "./screens/Profile";
 import QuotesList from "./ui/Quotes/QuotesList";
 import { Navigate } from "react-router-dom";
 import AuthorList from "./ui/Authors/AuthorList";
+import CreatePage from "./screens/CreatePage";
 const Router = () => {
   return (
     <>
@@ -21,6 +22,7 @@ const Router = () => {
             <Route element={<AuthorList />} path={`/authors`} />
             <Route element={<AuthorPage />} path={`/authors/:id`} />
             <Route element={<Profile />} path={`/acc`} />
+            <Route element={<CreatePage />} path={`/create`} />
             <Route element={<div> Not Found </div>} path={`*`} />
           </Routes>
         </main>
