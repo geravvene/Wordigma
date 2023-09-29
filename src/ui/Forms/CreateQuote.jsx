@@ -21,15 +21,14 @@ const CreateQuote = ({
     <>
       <Form
         arg={{
-          onSubmit: () =>
-            handleSubmit(async (data) =>
-              mutate({
-                data: data,
-                arg: { path: "authors", check: "name", parse: "author" },
-              })
-            ),
+          onSubmit: handleSubmit(async (data) =>
+            mutate({
+              data: data,
+              arg: { path: "authors", check: "name", parse: "author" },
+            })
+          ),
         }}
-        button={{ isSubmitting, color: "bg-blue", type: "submit" }}
+        button={{ disabled: isSubmitting, color: "bg-blue", type: "submit" }}
         text={"Создать"}
       >
         <div className={`flexcol w-full col-span-6 gap-3`}>
@@ -51,7 +50,6 @@ const CreateQuote = ({
         </div>
         <div className={`flexcol col-span-6 gap-3`}>
           <select
-            id="author"
             className="input"
             {...register(`author`, {
               required: `Автор необходим`,

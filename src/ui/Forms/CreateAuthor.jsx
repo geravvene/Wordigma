@@ -13,7 +13,7 @@ const CreateAuthor = ({
     <>
       <Form
         arg={{
-          onSubmit: () =>
+          onSubmit: 
             handleSubmit(async (data) => mutate({ data: data, arg: { path: "authors", check: "name" } })),
         }}
         button={{ disabled: isSubmitting, color: "bg-blue", type: "submit" }}

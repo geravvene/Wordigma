@@ -28,12 +28,11 @@ const Entry = ({
     <>
       <Form
         arg={{
-          onSubmit: () =>
-            handleSubmit(async (data) =>
-              setUser
-                ? checkAuthorization(data, setUser, setText)
-                : mutate({ data: data, arg: { path: "users", check: "name" } })
-            ),
+          onSubmit: handleSubmit(async (data) =>
+            setUser
+              ? checkAuthorization(data, setUser, setText)
+              : mutate({ data: data, arg: { path: "users", check: "name" } })
+          ),
         }}
         button={{
           color: setUser ? `bg-green` : `bg-blue`,

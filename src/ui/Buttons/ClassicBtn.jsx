@@ -7,14 +7,11 @@ const ClassicBtn = ({
   shadow,
   className,
   arg,
-  type,
-  disabled
 }) => {
   return (
     <>
       <button
-        type={type}
-        disabled={disabled}
+        {...arg}
         className={`relative flexcol fullcenter duration-150 w-full ${color} ${
           device.mobile() ? `active:` : `hover:`
         }${color + `-light`} ${padding ?? `p-1.5`} ${rounded ?? `rounded-md`} ${
