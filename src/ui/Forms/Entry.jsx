@@ -3,15 +3,15 @@ import Input from "./Input";
 import Form from "./Form";
 import { withForm } from "../../HOCs/withForm";
 
-async function checkAuthorization(acc) {
+async function checkAuthorization(acc, setUser, setText) {
   FuncService.checkExistence(
-    `users/filter/${JSON.stringify({ name: acc.data.username })}`
+    `users/filter/${JSON.stringify({ name: acc.name })}`
   ).then((data) => {
     data
-      ? data[0].password == acc.data.password
-        ? acc.arg.setUser(data[0])
-        : acc.arg.setText(`Неверный пароль`)
-      : acc.arg.setText(`Пользователь не найден`);
+      ? data[0].password == acc.password
+        ? setUser(data[0])
+        : setText(`Неверный пароль`)
+      : setText(`Пользователь не найден`);
   });
 }
 
@@ -27,16 +27,19 @@ const Entry = ({
   return (
     <>
       <Form
-        func={setUser ? checkAuthorization : mutate}
-        arg={
-          setUser
-            ? { setUser, setText }
-            : { path: "users", check: "name"}
-        }
-        color={setUser ? `bg-green` : `bg-blue`}
-        text={setUser ? `Войти` : `Зарегистрироваться`}
+        arg={{
+          onSubmit: () =>
+            handleSubmit(async (data) =>
+              setUser
+                ? checkAuthorization(data, setUser, setText)
+                : mutate({ data: data, arg: { path: "users", check: "name" } })
+            ),
+        }}
+        button={{
+          color: setUser ? `bg-green` : `bg-blue`,
+        }}
         isSubmitting={isSubmitting}
-        handleSubmit={handleSubmit}
+        text={setUser ? `Войти` : `Зарегистрироваться`}
       >
         <div className={`flexcol w-full col-span-6 gap-3`}>
           <Input
@@ -65,7 +68,7 @@ const Entry = ({
                 message: "Минимум 6 символов",
               },
               pattern: {
-                value: /[0-9]+/,
+                value: /[\d]+/,
                 message: "Содержит хотя бы одно число",
               },
             })}

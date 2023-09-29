@@ -20,12 +20,17 @@ const CreateQuote = ({
   return (
     <>
       <Form
-        func={mutate}
-        arg={{ path: "quotes", check: "text", parse: "author" }}
-        color={"bg-blue"}
+        arg={{
+          onSubmit: () =>
+            handleSubmit(async (data) =>
+              mutate({
+                data: data,
+                arg: { path: "authors", check: "name", parse: "author" },
+              })
+            ),
+        }}
+        button={{ isSubmitting, color: "bg-blue", type: "submit" }}
         text={"Создать"}
-        isSubmitting={isSubmitting}
-        handleSubmit={handleSubmit}
       >
         <div className={`flexcol w-full col-span-6 gap-3`}>
           <Input

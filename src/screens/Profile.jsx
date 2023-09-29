@@ -37,19 +37,22 @@ const Profile = () => {
           />
           <div className={`flexcol justify-between pb-[0.1rem] `}>
             <ClassicBtn
-              func={setUser}
-              arg={{}}
+              arg={{ onClick: () => setUser({}) }}
               rounded={`rounded-md`}
               color={`bg-red`}
               className={`w-full`}
             >
               Выход
             </ClassicBtn>
-            <ClassicBtn func={mutate} rounded={`rounded-lg`} color={`bg-blue`}>
+            <ClassicBtn
+              arg={{ onClick: mutate }}
+              rounded={`rounded-lg`}
+              color={`bg-blue`}
+            >
               Очистить избранное
             </ClassicBtn>
           </div>
-          
+
           <div className={`flexcol justify-between pb-[0.1rem] `}>
             <Link to={`/create`}>
               <ClassicBtn

@@ -16,9 +16,9 @@ const Navbar = ({ isActive, setIsActive, refs }) => {
       >
         <UlMenu>
           <LiOption
+            key={refs[1].value}
             focus={window.location.href.includes(refs[1].href)}
-            func={navigate}
-            arg={refs[1].href}
+            arg={{ onClick: () => navigate(refs[1].href) }}
           >
             {refs[1].value}
             {user.img ? (
@@ -33,8 +33,7 @@ const Navbar = ({ isActive, setIsActive, refs }) => {
             <LiOption
               key={ref.value}
               focus={window.location.href.includes(ref.href)}
-              func={navigate}
-              arg={ref.href}
+              arg={{ onClick: () => navigate(ref.href) }}
             >
               {ref.value}
             </LiOption>

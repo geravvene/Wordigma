@@ -1,25 +1,14 @@
 import ClassicBtn from "../Buttons/ClassicBtn";
-const Form = ({
-  handleSubmit,
-  isSubmitting,
-  func,
-  arg,
-  children,
-  color,
-  text,
-}) => {
+const Form = ({ children, text, button, arg, isSubmitting }) => {
   return (
-    <form
-      onSubmit={handleSubmit(async (data) => func({ data: data, arg: arg }))}
-      className={`grid12-3 content`}
-    >
+    <form {...arg} className={`grid12-3 content`}>
       {children}
       <div className={`col-span-6 col-start-4`}>
         <ClassicBtn
-          type={`submit`}
-          disabled={isSubmitting}
           rounded={`rounded-lg`}
-          color={color}
+          color={button.color}
+          type={"submit"}
+          disabled={isSubmitting}
         >
           {text}
         </ClassicBtn>

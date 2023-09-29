@@ -1,6 +1,6 @@
 import { ErrorMessage } from "@hookform/error-message";
 
-const Input = ({name, register, errors}) => {
+const Input = ({name, register, errors, arg}) => {
   
   return (
     <>
@@ -8,6 +8,7 @@ const Input = ({name, register, errors}) => {
         className={`input ${errors[name] ? `border-red border-[1px]` : ``}`}
         {...register}
         placeholder={name}
+        {...arg}
       />
       <ErrorMessage
         errors={errors}

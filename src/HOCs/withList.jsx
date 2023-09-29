@@ -66,7 +66,7 @@ export const withList = (Component) => (props) => {
   const data = props.data
     ?.filter((n) => getFilter(n, filter))
     .sort((a, b) => getSort(a, b, sort))
-    .filter((n) => n[props.search].includes(search));
+    .filter((n) => n[props.search].match(new RegExp(`^` + search, `i`)));
 
   return (
     <>
@@ -76,16 +76,15 @@ export const withList = (Component) => (props) => {
           placeholder={`Search...`}
           onChange={(e) => setSearch(e.target.value)}
         />
-      
-          <SelectionBar
-            sorts={props.sorts}
-            filters={props.filters}
-            fltr={filter}
-            setFilter={setFilter}
-            srt={sort}
-            setSort={setSort}
-          />
-  
+
+        <SelectionBar
+          sorts={props.sorts}
+          filters={props.filters}
+          fltr={filter}
+          setFilter={setFilter}
+          srt={sort}
+          setSort={setSort}
+        />
       </Title>
       <div className={`content`}>
         {props.loading.includes(true) ? (

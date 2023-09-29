@@ -40,7 +40,7 @@ const FavoriteBtn = ({ quote, user }) => {
   return (
     <>
       <ClassicBtn
-        func={mutate}
+        arg={{ onClick: mutate }}
         rounded={`rounded-tr-md rounded-bl-xl`}
         shadow={`shadow shadow-black`}
         color={favorite ? `bg-green` : `bg-blue`}

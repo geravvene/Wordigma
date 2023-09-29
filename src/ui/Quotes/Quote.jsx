@@ -84,9 +84,11 @@ const Quote = ({ quote, user, openId, setOpenId, width }) => {
            `}
             >
               <ClassicBtn
-                func={setOpenId}
-                arg={quote._id == openId ? null : quote._id}
-                padding={` `}
+                arg={{
+                  onClick: () =>
+                    setOpenId(quote._id == openId ? null : quote._id),
+                }}
+                padding={``}
                 rounded={`round`}
                 shadow={`shadow-black shadow`}
                 color={`bg-gray`}

@@ -1,7 +1,7 @@
-const UlMenu = ({ children, text, style }) => {
+const UlMenu = ({ children, text, arg }) => {
   return (
     <>
-      <div className={style}>
+      <div {...arg}>
         <div className={`ml-3  font-bold`}>{text}</div>
         <ul className={`p-3 text-left `}>
           <div

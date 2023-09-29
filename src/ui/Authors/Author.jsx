@@ -11,6 +11,7 @@ const Author = ({ author }) => {
       >
         <UpLink
           name={author.name}
+          arg={{to:`/authors/${author._id}`, className: "relative"}}
           path={`/authors/${author._id}`}
           height={`h-[10%]`}
           id={`author${author._id}`}

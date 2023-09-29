@@ -22,8 +22,7 @@ const SelectionBar = ({ sorts, filters, fltr, setFilter, srt, setSort }) => {
                     <LiOption
                       key={filter}
                       focus={fltr == filter}
-                      func={setFilter}
-                      arg={filter}
+                      arg={{ onClick: () => setFilter(filter) }}
                     >
                       {filter}
                     </LiOption>
@@ -38,8 +37,7 @@ const SelectionBar = ({ sorts, filters, fltr, setFilter, srt, setSort }) => {
                     <LiOption
                       key={sort}
                       focus={srt == sort}
-                      func={setSort}
-                      arg={sort}
+                      arg={{ onClick: () => setSort(sort) }}
                     >
                       {sort}
                     </LiOption>
@@ -55,10 +53,9 @@ const SelectionBar = ({ sorts, filters, fltr, setFilter, srt, setSort }) => {
 
           <div>
             <ClassicBtn
-              func={setActive}
-              arg={!active}
               color={`bg-gray`}
               rounded={`rounded-tr-md rounded-bl-md`}
+              arg={{ onClick: () => setActive(!active) }}
             >
               <VscSortPrecedence />
             </ClassicBtn>
