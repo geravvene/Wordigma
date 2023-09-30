@@ -31,13 +31,22 @@ const Entry = ({
           onSubmit: handleSubmit(async (data) =>
             setUser
               ? checkAuthorization(data, setUser, setText)
-              : mutate({ data: data, arg: { path: "users", check: "name" } })
+              : mutate({
+                  data: {
+                    ...data,
+                    favorite: [],
+                    img: `https://conceptwindows.com.au/wp-content/uploads/no-profile-pic-icon-27.png`,
+                  },
+                  path: "users",
+                  check: "name",
+                })
           ),
         }}
         button={{
+          disabled: isSubmitting,
           color: setUser ? `bg-green` : `bg-blue`,
+          type: "submit",
         }}
-        isSubmitting={isSubmitting}
         text={setUser ? `Войти` : `Зарегистрироваться`}
       >
         <div className={`flexcol w-full col-span-6 gap-3`}>

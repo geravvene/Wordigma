@@ -4,18 +4,14 @@ import { useMutation } from "react-query";
 import Title from "../ui/Title";
 import { FuncService } from "../services/func.service";
 
-async function postData(data, arg) {
-  console.log(data);
+async function postData(data, path, check) {
   if (
     await FuncService.checkExistence(
-      `${arg.path}/filter/${JSON.stringify({ [arg.check]: data[arg.check] })}`
+      `${path}/filter/${JSON.stringify({ [check]: data[check] })}`
     )
   )
     throw new Error("Имя занято");
-  return await DataService.postData(
-    arg.path,
-    arg.parse ? { ...data, [arg.parse]: JSON.parse(data[arg.parse]) } : data
-  );
+  return await DataService.postData(path, data);
 }
 
 export const withForm = (Component) => (props) => {
@@ -26,8 +22,8 @@ export const withForm = (Component) => (props) => {
     formState: { isSubmitting, errors },
   } = useForm({ mode: `onChange`, criteriaMode: "all" });
   const { mutate } = useMutation(
-    [`create quote`],
-    async ({ data, arg }) => await postData(data, arg),
+    [props.text],
+    async ({ data, path, check }) => await postData(data, path, check),
     {
       onSuccess: () => {
         props?.setText(`Успешно`);

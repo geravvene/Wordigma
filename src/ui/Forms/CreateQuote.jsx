@@ -23,8 +23,9 @@ const CreateQuote = ({
         arg={{
           onSubmit: handleSubmit(async (data) =>
             mutate({
-              data: data,
-              arg: { path: "authors", check: "name", parse: "author" },
+              data: { ...data, author: JSON.parse(data.author) },
+              path: "authors",
+              check: "name",
             })
           ),
         }}
