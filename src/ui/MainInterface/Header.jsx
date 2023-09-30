@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import ClassicBtn from "../Buttons/ClassicBtn";
 import { VscThreeBars } from "react-icons/vsc";
 import device from "current-device";
+import { useLocation } from "react-router-dom";
 
 const refs = [
   { value: `Авторизация`, href: `reg` },
@@ -30,10 +31,12 @@ const HeaderPositionController = (head) => {
 };
 
 const Header = () => {
+  const {pathname} = useLocation();
   const [isNavActive, setIsNavActive] = useState(false);
   const head = useRef(null);
-  useEffect(() => HeaderPositionController(head), []);
-
+  useEffect(() => {
+    HeaderPositionController(head);
+  }, []);
   return (
     <>
       <header
@@ -65,7 +68,7 @@ const Header = () => {
           )}
           <div className={`font-bold`}>
             {refs
-              .filter((ref) => window.location.href.includes(ref.href))
+              .filter((ref) => pathname.includes(ref.href))
               .map((ref) => (
                 <p key={ref.value}>{ref.value}</p>
               ))}
@@ -77,6 +80,7 @@ const Header = () => {
             isActive={isNavActive}
             setIsActive={setIsNavActive}
             refs={refs}
+            location={pathname}
           />
         </nav>
       </header>

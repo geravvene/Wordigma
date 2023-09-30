@@ -3,7 +3,7 @@ import LiOption from "../LiOption";
 import { useNavigate } from "react-router-dom";
 import UlMenu from "../UlMenu";
 
-const Navbar = ({ isActive, setIsActive, refs }) => {
+const Navbar = ({ isActive, setIsActive, refs, location }) => {
   const { user } = useAuth();
   const navigate = useNavigate();
   return (
@@ -17,7 +17,7 @@ const Navbar = ({ isActive, setIsActive, refs }) => {
         <UlMenu>
           <LiOption
             key={refs[1].value}
-            focus={window.location.href.includes(refs[1].href)}
+            focus={location.includes(refs[1].href)}
             arg={{ onClick: () => navigate(refs[1].href) }}
           >
             {refs[1].value}
@@ -32,7 +32,7 @@ const Navbar = ({ isActive, setIsActive, refs }) => {
           {refs.slice(2).map((ref) => (
             <LiOption
               key={ref.value}
-              focus={window.location.href.includes(ref.href)}
+              focus={location.includes(ref.href)}
               arg={{ onClick: () => navigate(ref.href) }}
             >
               {ref.value}
