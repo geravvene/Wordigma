@@ -1,23 +1,28 @@
 import Input from "./Input";
-import { withForm } from "../../HOCs/withForm";
 import Form from "./Form";
+import { useMutateForm } from "../../hooks/useMutateForm";
+import { DataService } from "../../services/data.service";
 
-const CreateAuthor = ({
-  isSubmitting,
-  handleSubmit,
-  mutate,
-  errors,
-  register,
-}) => {
+const CreateAuthor = ({ setText }) => {
+  const { errors, register, mutate, isSubmitting, handleSubmit, reset } =
+    useMutateForm("authors", "name", {
+      onSuccess: async () => {
+        setText("Автор добавлен");
+        reset();
+      },
+      onError: (error) => setText(error.message),
+    }, DataService.postDataWithFile);
   return (
     <>
       <Form
         arg={{
-          onSubmit: 
-            handleSubmit(async (data) => mutate({ data: data, path: "authors", check: "name"  })),
+          onSubmit: handleSubmit(async (data) =>
+            mutate({ ...data, img: data.img.item(0) })
+          ),
         }}
         button={{ disabled: isSubmitting, color: "bg-blue", type: "submit" }}
         text={"Создать"}
+        title={"Создать Автора"}
       >
         <div className={`flexcol w-full col-span-6 gap-3`}>
           <Input
@@ -53,14 +58,19 @@ const CreateAuthor = ({
           <Input
             name={`img`}
             register={register(`img`, {
+              validate: {
+                isImg: (v) =>
+                  v.item(0).type.includes("image") ||
+                  "Должно быть изображением",
+              },
               required: `Фото необходимо`,
             })}
             errors={errors}
-            arg={{ type: "file", onChange: (e) => console.log(e.target.value) }}
+            arg={{ type: "file" }}
           />
         </div>
       </Form>
     </>
   );
 };
-export default withForm(CreateAuthor);
+export default CreateAuthor;

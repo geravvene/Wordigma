@@ -11,6 +11,7 @@ const QuotesList = ({ title, author }) => {
     () => DataService.getData(types.get(title).path(user)),
     { enabled: !author }
   );
+
   return (
     <>
       <Quotes

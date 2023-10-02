@@ -14,4 +14,11 @@ export const DataService = {
   async postData(path, item) {
     return await server.post(path, item);
   },
+  async postDataWithFile(path, item) {
+    var form_data = new FormData();
+    for (var key in item) {
+      form_data.append(key, item[key]);
+    }
+    return await server.postForm(path, form_data);
+  },
 };

@@ -24,7 +24,7 @@ const FavoriteBtn = ({ quote, user }) => {
     [`update favorite`],
     () =>
       DataService.updateData(
-        `users/${user._id}/array/${!favorite ? `add` : `del`}/favorite`,
+        `users/${user._id}/favorite/${!favorite ? `add` : `del`}`,
         quote
       ),
     {

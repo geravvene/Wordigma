@@ -14,7 +14,7 @@ const Profile = () => {
   const queryClient = useQueryClient();
   const { mutate } = useMutation(
     [`create acc`],
-    () => DataService.updateData(`users/${user._id}/clear/array/favorite`),
+    () => DataService.updateData(`users/${user._id}/clear/favorite`),
     {
       onSuccess: async () => {
         queryClient.invalidateQueries(`Избранные цитаты`);

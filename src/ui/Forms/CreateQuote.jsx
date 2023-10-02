@@ -1,19 +1,21 @@
 import { DataService } from "../../services/data.service";
 import Input from "./Input";
 import { useQuery } from "react-query";
-import { withForm } from "../../HOCs/withForm";
 import Form from "./Form";
+import { useMutateForm } from "../../hooks/useMutateForm";
 
-const CreateQuote = ({
-  isSubmitting,
-  handleSubmit,
-  mutate,
-  errors,
-  register,
-}) => {
+const CreateQuote = ({ setText }) => {
   const { data, isLoading, isFetching } = useQuery([`authors`], () =>
     DataService.getData(`authors`)
   );
+  const { errors, register, mutate, isSubmitting, handleSubmit, reset } =
+    useMutateForm("quotes", "text", {
+      onSuccess: () => {
+        setText("Цитата добавлена");
+        reset();
+      },
+      onError: (error) => setText(error.message),
+    });
 
   if (isLoading || isFetching) return <p>Loading...</p>;
 
@@ -22,15 +24,12 @@ const CreateQuote = ({
       <Form
         arg={{
           onSubmit: handleSubmit(async (data) =>
-            mutate({
-              data: { ...data, author: JSON.parse(data.author) },
-              path: "authors",
-              check: "name",
-            })
+            mutate({ ...data, author: JSON.parse(data.author) })
           ),
         }}
         button={{ disabled: isSubmitting, color: "bg-blue", type: "submit" }}
         text={"Создать"}
+        title={"Создать Цитату"}
       >
         <div className={`flexcol w-full col-span-6 gap-3`}>
           <Input
@@ -67,4 +66,4 @@ const CreateQuote = ({
     </>
   );
 };
-export default withForm(CreateQuote);
+export default CreateQuote;

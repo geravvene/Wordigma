@@ -1,7 +1,7 @@
 import { FuncService } from "../../services/func.service";
 import Input from "./Input";
 import Form from "./Form";
-import { withForm } from "../../HOCs/withForm";
+import { useMutateForm } from "../../hooks/useMutateForm";
 
 async function checkAuthorization(acc, setUser, setText) {
   FuncService.checkExistence(
@@ -15,31 +15,37 @@ async function checkAuthorization(acc, setUser, setText) {
   });
 }
 
-const Entry = ({
-  isSubmitting,
-  handleSubmit,
-  mutate,
-  errors,
-  register,
-  setUser,
-  setText,
-}) => {
+const Entry = ({ setText, setUser }) => {
+  const { errors, register, mutate, isSubmitting, handleSubmit, reset } =
+    useMutateForm(
+      "users",
+      "name",
+      setUser
+        ? { onError: (error) => setText(error.message) }
+        : {
+            onSuccess: () => {
+              setText("Пользователь успешно зарегистрирован");
+              reset();
+            },
+            onError: (error) => setText(error.message),
+          }
+    );
   return (
     <>
       <Form
         arg={{
-          onSubmit: handleSubmit(async (data) =>
+          onSubmit: handleSubmit(
             setUser
-              ? checkAuthorization(data, setUser, setText)
-              : mutate({
-                  data: {
+              ? (data) => {
+                  checkAuthorization(data, setUser, setText);
+                }
+              : (data) => {
+                  mutate({
                     ...data,
                     favorite: [],
                     img: `https://conceptwindows.com.au/wp-content/uploads/no-profile-pic-icon-27.png`,
-                  },
-                  path: "users",
-                  check: "name",
-                })
+                  });
+                }
           ),
         }}
         button={{
@@ -48,6 +54,7 @@ const Entry = ({
           type: "submit",
         }}
         text={setUser ? `Войти` : `Зарегистрироваться`}
+        title={setUser ? `Вход` : `Регистрация`}
       >
         <div className={`flexcol w-full col-span-6 gap-3`}>
           <Input
@@ -87,4 +94,4 @@ const Entry = ({
     </>
   );
 };
-export default withForm(Entry);
+export default Entry;

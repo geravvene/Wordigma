@@ -1,4 +1,4 @@
-import logo from "../../assets/logo.png";
+import logo from "../../assets/images/site/logo.png";
 import Navbar from "./Navbar.jsx";
 import { useRef, useState } from "react";
 import { useEffect } from "react";

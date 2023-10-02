@@ -1,11 +1,15 @@
 import express from "express";
-import cors from "cors";
 import { MongoClient } from "mongodb";
+import { ObjectId } from "bson";
+import { getController } from "./controllers/getController.js";
+import { putController } from "./controllers/putController.js";
+import { postController } from "./controllers/postController.js";
 
 const client = new MongoClient("mongodb://127.0.0.1:27017/");
 
+const db = client.db("Wordigma");
+
 const app = express();
-app.use(cors());
 app.use(express.json());
 app.use(function (req, res, next) {
   res.setHeader("Access-Control-Allow-Origin", "http://localhost:5173");
@@ -25,9 +29,9 @@ app.use(function (req, res, next) {
   }
 })();
 
-import("./Controller.js").then((obj) =>
-  obj.default(app, client.db("Wordigma"))
-);
+getController(app, db, ObjectId);
+putController(app, db, ObjectId);
+postController(app, db, ObjectId);
 
 app.listen(5172);
 

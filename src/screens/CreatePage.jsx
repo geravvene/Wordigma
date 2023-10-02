@@ -1,15 +1,18 @@
 import CreateQuote from "../ui/Forms/CreateQuote";
+import CreateAuthor from "../ui/Forms/CreateAuthor";
+import { useState } from "react";
+import FormPage from "../ui/Forms/FormPage";
 
 const CreatePage = () => {
+  const [text, setText] = useState(
+    "Введите данные"
+  );
   return (
     <>
-      <div className={`absolute h-full w-full flexcol`}>
-        <div className={`grid12`}>
-          <div className={`col-span-12 md:col-span-6`}>
-            <CreateQuote text={"Создать цитату"} />
-          </div>
-        </div>
-      </div>
+      <FormPage text={text}>
+        <CreateQuote setText={setText} />
+        <CreateAuthor setText={setText} />
+      </FormPage>
     </>
   );
 };
