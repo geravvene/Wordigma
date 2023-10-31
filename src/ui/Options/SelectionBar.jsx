@@ -17,7 +17,7 @@ const SelectionBar = ({ sorts, filters, fltr, setFilter, srt, setSort }) => {
           {active ? (
             <>
               {filters ? (
-                <UlMenu text={`Фильтр`} style={`pt-1`}>
+                <UlMenu text={`Фильтр`}>
                   {filters.map((filter) => (
                     <LiOption
                       key={filter}
@@ -32,7 +32,7 @@ const SelectionBar = ({ sorts, filters, fltr, setFilter, srt, setSort }) => {
                 <></>
               )}
               {sorts ? (
-                <UlMenu text={`Сортировка`} style={`pt-1`}>
+                <UlMenu text={`Сортировка`}>
                   {sorts.map((sort) => (
                     <LiOption
                       key={sort}
