@@ -1,19 +1,21 @@
-import React from 'react';
-import ClassicBtn from './ClassicBtn';
+import { memo } from 'react';
+import { useSelector } from 'react-redux';
 import { VscHeart } from 'react-icons/vsc';
 import { VscHeartFilled } from 'react-icons/vsc';
-import useActions from '../../hooks/useActions';
-import { useSelector } from 'react-redux';
 
-const FavoriteBtn = ({ quote }) => {
+import ClassicBtn from './ClassicBtn';
+import useActions from '../../hooks/useActions';
+
+
+const FavoriteBtn = ({ quote_id }) => {
   const isFavorite = useSelector(
     (state) => state.userReducer.favorite
-  ).includes(quote._id);
+  ).includes(quote_id);
   const { toggleFavorite } = useActions();
   return (
     <>
       <ClassicBtn
-        arg={{ onClick: () => toggleFavorite(quote._id) }}
+        arg={{ onClick: () => toggleFavorite(quote_id) }}
         rounded={`rounded-tr-md rounded-bl-xl`}
         shadow={`shadow shadow-black`}
         color={isFavorite ? `bg-green` : `bg-blue`}
@@ -27,4 +29,4 @@ const FavoriteBtn = ({ quote }) => {
     </>
   );
 };
-export default FavoriteBtn;
+export default memo(FavoriteBtn);

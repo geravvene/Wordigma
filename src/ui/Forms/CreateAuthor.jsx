@@ -1,7 +1,9 @@
+import { useCallback } from 'react';
+
+import { DataService } from '../../services/data.service';
+import { useMutateForm } from '../../hooks/useMutateForm';
 import Input from './Input';
 import Form from './Form';
-import { useMutateForm } from '../../hooks/useMutateForm';
-import { DataService } from '../../services/data.service';
 
 const CreateAuthor = ({ setText }) => {
   const { errors, register, mutate, isSubmitting, handleSubmit, reset } =
@@ -9,7 +11,7 @@ const CreateAuthor = ({ setText }) => {
       'authors',
       'name',
       {
-        onSuccess: async () => {
+        onSuccess: () => {
           setText('Автор добавлен');
           reset();
         },
@@ -17,13 +19,14 @@ const CreateAuthor = ({ setText }) => {
       },
       DataService.postDataWithFile
     );
+  const changeData = useCallback((data) => {
+    mutate({ ...data, img: data.img.item(0) });
+  }, []);
   return (
     <>
       <Form
         arg={{
-          onSubmit: handleSubmit(async (data) =>
-            mutate({ ...data, img: data.img.item(0) })
-          ),
+          onSubmit: handleSubmit(changeData),
         }}
         button={{ disabled: isSubmitting, color: 'bg-blue', type: 'submit' }}
         text={'Создать'}

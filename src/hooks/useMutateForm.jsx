@@ -1,6 +1,7 @@
 import { DataService } from '../services/data.service';
 import { useForm } from 'react-hook-form';
 import { useMutation } from 'react-query';
+
 import { FuncService } from '../services/func.service';
 
 async function postData(data, path, check, func) {

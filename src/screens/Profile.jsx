@@ -1,9 +1,9 @@
-import Title from '../ui/Title.jsx';
+import { useSelector } from 'react-redux';
+import { Navigate, Link } from 'react-router-dom';
+
+import Title from '../ui/Others/Title.jsx';
 import ClassicBtn from '../ui/Buttons/ClassicBtn.jsx';
 import QuotesList from '../ui/Quotes/QuotesList.jsx';
-import { useSelector } from 'react-redux';
-import { Navigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 import useActions from '../hooks/useActions.jsx';
 
 const Profile = () => {

@@ -1,17 +1,18 @@
-import Entry from '../ui/Forms/Entry';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
+
 import FormPage from '../ui/Forms/FormPage';
-import { useState } from 'react';
 import useActions from '../hooks/useActions';
+import Entry from '../ui/Forms/Entry';
 
 const Authorization = () => {
-  const user = useSelector((state) => state.userReducer._id);
+  const user_id = useSelector((state) => state.userReducer?._id);
   const { change } = useActions();
   const [text, setText] = useState(
     'Без авторизации вы не сможете добавлять цитаты в избранное'
   );
-  return user ? (
+  return user_id ? (
     <Navigate to="/rec" />
   ) : (
     <>

@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 const QuoteText = ({ style, id, children }) => {
   return (
     <>
@@ -5,9 +7,10 @@ const QuoteText = ({ style, id, children }) => {
         id={id}
         className={`italic flex hyphens-auto h-fit rounded-md ${style}`}
       >
-        {children}
+        <p>"</p>
+        {children}"
       </div>
     </>
   );
 };
-export default QuoteText;
+export default memo(QuoteText);

@@ -1,18 +1,17 @@
 import { useSelector } from 'react-redux';
-import LiOption from '../LiOption';
 import { useNavigate } from 'react-router-dom';
-import UlMenu from '../UlMenu';
 
-const Navbar = ({ isActive, setIsActive, refs, location }) => {
-  const user = useSelector((state) => state.userReducer);
+import UlMenu from '../Options/UlMenu';
+import LiOption from '../Options/LiOption';
+
+const Navbar = ({ isActive, setClose, refs, location }) => {
+  const user_img = useSelector((state) => state.userReducer?.img);
   const navigate = useNavigate();
   return (
     <>
       <div
         className={isActive ? `nav_menu active` : `nav_menu`}
-        onClick={() => {
-          setIsActive(false);
-        }}
+        onClick={setClose}
       >
         <UlMenu>
           <LiOption
@@ -21,11 +20,11 @@ const Navbar = ({ isActive, setIsActive, refs, location }) => {
             arg={{ onClick: () => navigate(refs[1].href) }}
           >
             {refs[1].value}
-            {user?.img ? (
+            {user_img ? (
               <img
                 alt={`acc_icon`}
                 className={`rounded-md w-5 h-5 ml-3`}
-                src={user.img}
+                src={user_img}
               />
             ) : null}
           </LiOption>

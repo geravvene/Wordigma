@@ -1,14 +1,15 @@
-import { DataService } from '../../services/data.service';
 import { useQuery } from 'react-query';
-import Quotes from './Quotes';
 import { useSelector } from 'react-redux';
+
+import { DataService } from '../../services/data.service';
 import { types } from './QuotesListTypes.js';
+import Quotes from './Quotes';
 
 const QuotesList = ({ title, author }) => {
-  const user = useSelector((state) => state.userReducer);
+  const user_id = useSelector((state) => state.userReducer._id);
   const { data, isLoading, isFetching } = useQuery(
     [title],
-    () => DataService.getData(types.get(title).path(user)),
+    () => DataService.getData(types.get(title).path(user_id)),
     { enabled: !author }
   );
   return (
@@ -17,9 +18,9 @@ const QuotesList = ({ title, author }) => {
         data={data ?? author?.quotes}
         title={title}
         loading={[isFetching, isLoading]}
-        sorts={types.get(title)?.sorts}
-        filters={types.get(title)?.filters}
-        user={user}
+        sorts={types.get(title).sorts}
+        filters={types.get(title).filters}
+        user={user_id}
         search={'text'}
       />
     </>

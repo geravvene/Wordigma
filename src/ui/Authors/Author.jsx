@@ -1,19 +1,22 @@
-import React from 'react';
-import UpLink from '../UpLink';
+import { useCallback } from 'react';
+
+import UpLink from '../Others/UpLink';
 
 const Author = ({ author }) => {
+  const onHover = useCallback(() => {
+    $(`#author${author._id}`).toggleClass(`h-[30%]`);
+  }, []);
   return (
     <>
       <div
-        onMouseEnter={() => $(`#author${author._id}`).addClass(`h-[30%]`)}
-        onMouseLeave={() => $(`#author${author._id}`).removeClass(`h-[30%]`)}
-        className={`col-span-6 sm:col-span-4 md:col-span-3 lg:col-span-2 shadows h-full rounded-b-xl aspect-[3/4]`}
+        onMouseEnter={onHover}
+        onMouseLeave={onHover}
+        className={`col-span-6 sm:col-span-4 md:col-span-3 lg:col-span-2 shadows h-full rounded-b-xl aspect-[3/4] relative`}
       >
         <UpLink
           name={author.name}
-          arg={{ to: `/authors/${author._id}`, className: 'relative' }}
           path={`/authors/${author._id}`}
-          height={`h-[10%]`}
+          style={`h-[10%]`}
           id={`author${author._id}`}
         >
           <img

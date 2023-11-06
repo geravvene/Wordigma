@@ -1,6 +1,7 @@
+import { useQuery } from 'react-query';
+
 import { DataService } from '../../services/data.service';
 import Authors from './Authors';
-import { useQuery } from 'react-query';
 
 const sorts = [`По алфавиту`, `Количество цитат`, `Количество избранных цитат`];
 const filters = [`Есть избранное`];

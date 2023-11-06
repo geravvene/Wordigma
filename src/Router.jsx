@@ -8,16 +8,19 @@ import Profile from './screens/Profile';
 import QuotesList from './ui/Quotes/QuotesList';
 import { Navigate } from 'react-router-dom';
 import AuthorList from './ui/Authors/AuthorList';
-import CreatePage from './screens/CreatePage';
+
 import { useQuery } from 'react-query';
 import { useSelector } from 'react-redux';
+
 import useActions from './hooks/useActions';
 import { DataService } from './services/data.service';
+import CreatePage from './screens/CreatePage';
+
 const Router = () => {
-  const user = useSelector((state) => state.userReducer);
+  const user_id = useSelector((state) => state.userReducer?._id);
   const { change } = useActions();
-  useQuery(['user'], () => DataService.getData(`/users/${user._id}`), {
-    enabled: !!user,
+  useQuery(['user'], () => DataService.getData(`/users/${user_id}`), {
+    enabled: !!user_id,
     onSuccess: (data) => change(data),
   });
   return (

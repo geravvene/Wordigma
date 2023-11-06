@@ -1,9 +1,9 @@
-import FavoriteBtn from '../Buttons/FavoriteBtn';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { VscChevronDown } from 'react-icons/vsc';
+
 import ClassicBtn from '../Buttons/ClassicBtn';
-import { useEffect } from 'react';
-import UpLink from '../UpLink';
+import FavoriteBtn from '../Buttons/FavoriteBtn';
+import UpLink from '../Others/UpLink';
 import QuoteText from './QuoteText';
 
 const isTextOverflow = (quote_id) => {
@@ -36,8 +36,7 @@ const QuoteSizeController = (quote_id, open, setOpen, width) => {
     $(`#${quote_id}`).css({
       height: `125px`,
     });
-    setOpen({ ...open, wasOpen: false });
-    setOpen({ ...open, isOpen: false });
+    setOpen({ wasOpen: false, isOpen: false });
   } else {
     $(`#text${quote_id}`).addClass(`self-center`);
     $(`#more${quote_id}`).removeClass(`flex`);
@@ -69,12 +68,11 @@ const Quote = ({ quote, user, openId, setOpenId, width }) => {
           }`}
         >
           <QuoteText style={`text-justify mr-2 ml-2`} id={`text${quote._id}`}>
-            <p>"</p>
-            {quote.text}"
+            {quote.text}
           </QuoteText>
 
           <div className={`min-w-fit flex flex-col items-center`}>
-            {user ? <FavoriteBtn quote={quote} user={user} /> : <></>}
+            {user ? <FavoriteBtn quote={quote._id} /> : null}
 
             <div
               id={`more${quote._id}`}
@@ -99,16 +97,14 @@ const Quote = ({ quote, user, openId, setOpenId, width }) => {
           </div>
         </div>
         {!window.location.href.includes(`authors`) ? (
-          <>
+          <div className="relative">
             <UpLink
               name={quote.author.name}
               path={`/authors/${quote.author._id}`}
-              height={`h-[25px] hover:h-[40px]`}
+              style={`h-[25px] hover:h-[40px]`}
             />
-          </>
-        ) : (
-          <></>
-        )}
+          </div>
+        ) : null}
       </div>
     </>
   );

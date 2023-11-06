@@ -1,6 +1,8 @@
+import { useCallback } from 'react';
+import { useQuery } from 'react-query';
+
 import { DataService } from '../../services/data.service';
 import Input from './Input';
-import { useQuery } from 'react-query';
 import Form from './Form';
 import { useMutateForm } from '../../hooks/useMutateForm';
 
@@ -16,16 +18,16 @@ const CreateQuote = ({ setText }) => {
       },
       onError: (error) => setText(error.message),
     });
+  const changeData = useCallback((data) => {
+    mutate({ ...data, author: JSON.parse(data.author) });
+  }, []);
 
   if (isLoading || isFetching) return <p>Loading...</p>;
-
   return (
     <>
       <Form
         arg={{
-          onSubmit: handleSubmit(async (data) =>
-            mutate({ ...data, author: JSON.parse(data.author) })
-          ),
+          onSubmit: handleSubmit(changeData),
         }}
         button={{ disabled: isSubmitting, color: 'bg-blue', type: 'submit' }}
         text={'Создать'}

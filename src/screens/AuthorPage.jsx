@@ -1,9 +1,11 @@
-import { useParams } from 'react-router-dom';
-import { DataService } from '../services/data.service.jsx';
-import Title from '../ui/Title.jsx';
-import WikiFrame from '../ui/WikiFrame.jsx';
-import QuotesList from '../ui/Quotes/QuotesList.jsx';
 import { useQuery } from 'react-query';
+import { useParams } from 'react-router-dom';
+
+import { DataService } from '../services/data.service.jsx';
+import Title from '../ui/Others/Title.jsx';
+import WikiFrame from '../ui/Others/WikiFrame.jsx';
+import QuotesList from '../ui/Quotes/QuotesList.jsx';
+
 
 const AuthorPage = () => {
   const { id } = useParams();

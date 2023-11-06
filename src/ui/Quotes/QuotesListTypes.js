@@ -5,14 +5,14 @@ export const types = new Map([
     'Цитаты',
     {
       sorts: sorts.slice(1),
-      path: (user) => (user ? `quotes/rec/${user._id}` : `quotes`),
+      path: (user) => (user ? `quotes/rec/${user}` : `quotes`),
     },
   ],
   [
     'Избранные цитаты',
     {
       sorts: sorts,
-      path: (user) => `quotes/fav/${user._id}`,
+      path: (user) => `quotes/fav/${user}`,
     },
   ],
   [

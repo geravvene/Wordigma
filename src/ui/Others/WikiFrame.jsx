@@ -1,3 +1,5 @@
+import {memo} from 'react'
+
 const WikiFrame = ({ url }) => {
   return (
     <>
@@ -10,4 +12,4 @@ const WikiFrame = ({ url }) => {
     </>
   );
 };
-export default WikiFrame;
+export default memo(WikiFrame);

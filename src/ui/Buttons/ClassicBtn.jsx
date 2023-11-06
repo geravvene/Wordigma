@@ -1,4 +1,5 @@
 import device from 'current-device';
+
 const ClassicBtn = ({
   children,
   color,
@@ -7,10 +8,12 @@ const ClassicBtn = ({
   shadow,
   className,
   arg,
+  func,
 }) => {
   return (
     <>
       <button
+        onClick={func}
         {...arg}
         className={`relative flexcol fullcenter duration-150 w-full ${color} ${
           device.mobile() ? `active:` : `hover:`

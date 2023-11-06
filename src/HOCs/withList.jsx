@@ -1,6 +1,8 @@
-import Title from '../ui/Title.jsx';
-import SelectionBar from '../ui/Options/SelectionBar.jsx';
 import { useState } from 'react';
+
+import Title from '../ui/Others/Title.jsx';
+import SelectionBar from '../ui/Options/SelectionBar.jsx';
+
 
 const getFilter = (n, filter) => {
   switch (filter) {
@@ -66,7 +68,7 @@ export const withList = (Component) => (props) => {
   const data = props.data
     ?.filter((n) => getFilter(n, filter))
     .sort((a, b) => getSort(a, b, sort))
-    .filter((n) => n[props.search].match(new RegExp(`^` + search, `i`)));
+    .filter((n) => n[props.search].match(new RegExp(search, `i`)));
   return (
     <>
       <Title text={props.title}>

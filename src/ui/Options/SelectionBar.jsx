@@ -1,11 +1,26 @@
-import ClassicBtn from '../Buttons/ClassicBtn';
+import { useState, useCallback } from 'react';
 import { VscSortPrecedence } from 'react-icons/vsc';
-import { useState } from 'react';
-import LiOption from '../LiOption';
-import UlMenu from '../UlMenu';
+
+
+import LiOption from './LiOption';
+import UlMenu from './UlMenu';
+import ClassicBtn from '../Buttons/ClassicBtn';
 
 const SelectionBar = ({ sorts, filters, fltr, setFilter, srt, setSort }) => {
   const [active, setActive] = useState(false);
+  const handleSetFilter = useCallback(
+    (e) => {
+      setFilter(e.target.textContent);
+    },
+    [setFilter]
+  );
+  const handleSetSort = useCallback(
+    (e) => {
+      setSort(e.target.textContent);
+    },
+    [setSort]
+  );
+  const toggleActive = () => setActive(!active);
   return (
     <>
       <div
@@ -22,7 +37,7 @@ const SelectionBar = ({ sorts, filters, fltr, setFilter, srt, setSort }) => {
                     <LiOption
                       key={filter}
                       focus={fltr == filter}
-                      arg={{ onClick: () => setFilter(filter) }}
+                      func={handleSetFilter}
                     >
                       {filter}
                     </LiOption>
@@ -37,7 +52,7 @@ const SelectionBar = ({ sorts, filters, fltr, setFilter, srt, setSort }) => {
                     <LiOption
                       key={sort}
                       focus={srt == sort}
-                      arg={{ onClick: () => setSort(sort) }}
+                      func={handleSetSort}
                     >
                       {sort}
                     </LiOption>
@@ -55,7 +70,7 @@ const SelectionBar = ({ sorts, filters, fltr, setFilter, srt, setSort }) => {
             <ClassicBtn
               color={`bg-gray`}
               rounded={`rounded-tr-md rounded-bl-md`}
-              arg={{ onClick: () => setActive(!active) }}
+              func={toggleActive}
             >
               <VscSortPrecedence />
             </ClassicBtn>

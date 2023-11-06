@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import Router from './Router.jsx';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Provider } from 'react-redux';
 
 import store from './store/store.js';
+import Router from './Router.jsx';
 
 const queryClient = new QueryClient();
 

@@ -1,11 +1,12 @@
+import { useRef, useState, useCallback, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import { VscThreeBars } from 'react-icons/vsc';
+
+import device from 'current-device';
+
+import ClassicBtn from '../Buttons/ClassicBtn';
 import logo from '../../assets/images/site/logo.png';
 import Navbar from './Navbar.jsx';
-import { useRef, useState } from 'react';
-import { useEffect } from 'react';
-import ClassicBtn from '../Buttons/ClassicBtn';
-import { VscThreeBars } from 'react-icons/vsc';
-import device from 'current-device';
-import { useLocation } from 'react-router-dom';
 
 const refs = [
   { value: `Авторизация`, href: `reg` },
@@ -37,10 +38,17 @@ const Header = () => {
   useEffect(() => {
     HeaderPositionController(head);
   }, []);
+  const setStateTrue = useCallback(() => {
+    setIsNavActive(true);
+  }, []);
+  const setStateFalse = useCallback(() => {
+    setIsNavActive(false);
+  }, []);
+  const toggleState = () => setIsNavActive(!isNavActive);
   return (
     <>
       <header
-        onMouseLeave={() => setIsNavActive(false)}
+        onMouseLeave={setStateFalse}
         ref={head}
         className={`flexcol w-full z-20`}
       >
@@ -48,8 +56,7 @@ const Header = () => {
           {device.mobile() ? (
             <div>
               <ClassicBtn
-                func={setIsNavActive}
-                arg={!isNavActive}
+                func={toggleState}
                 shadow={`shadow shadow-black`}
                 color={isNavActive ? `bg-gray-light` : `bg-gray`}
               >
@@ -58,7 +65,7 @@ const Header = () => {
             </div>
           ) : (
             <div
-              onMouseEnter={() => setIsNavActive(true)}
+              onMouseEnter={setStateTrue}
               className={`rounded-md p-1.5 ${
                 isNavActive ? `bg-gray-light` : `bg-gray hover:bg-gray-light`
               }`}
@@ -78,7 +85,7 @@ const Header = () => {
         <nav>
           <Navbar
             isActive={isNavActive}
-            setIsActive={setIsNavActive}
+            setClose={setStateFalse}
             refs={refs}
             location={pathname}
           />
