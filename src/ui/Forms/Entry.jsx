@@ -1,3 +1,5 @@
+import { useCallback } from 'react';
+
 import { FuncService } from '../../services/func.service';
 import Input from './Input';
 import Form from './Form';
@@ -30,24 +32,22 @@ const Entry = ({ setText, setUser }) => {
             onError: (error) => setText(error.message),
           }
     );
+  const handleChangeData = useCallback(
+    (data) => {
+      setUser
+        ? checkAuthorization(data, setUser, setText)
+        : mutate({
+            ...data,
+            favorite: [],
+            img: `https://conceptwindows.com.au/wp-content/uploads/no-profile-pic-icon-27.png`,
+          });
+    },
+    [setUser, setText]
+  );
   return (
     <>
       <Form
-        arg={{
-          onSubmit: handleSubmit(
-            setUser
-              ? (data) => {
-                  checkAuthorization(data, setUser, setText);
-                }
-              : (data) => {
-                  mutate({
-                    ...data,
-                    favorite: [],
-                    img: `https://conceptwindows.com.au/wp-content/uploads/no-profile-pic-icon-27.png`,
-                  });
-                }
-          ),
-        }}
+        onSubmit={handleSubmit(handleChangeData)}
         button={{
           disabled: isSubmitting,
           color: setUser ? `bg-green` : `bg-blue`,

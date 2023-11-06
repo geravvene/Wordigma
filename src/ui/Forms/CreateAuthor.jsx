@@ -25,9 +25,7 @@ const CreateAuthor = ({ setText }) => {
   return (
     <>
       <Form
-        arg={{
-          onSubmit: handleSubmit(changeData),
-        }}
+        onSubmit={handleSubmit(changeData)}
         button={{ disabled: isSubmitting, color: 'bg-blue', type: 'submit' }}
         text={'Создать'}
         title={'Создать Автора'}

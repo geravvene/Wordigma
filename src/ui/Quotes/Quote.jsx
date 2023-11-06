@@ -5,7 +5,6 @@ import ClassicBtn from '../Buttons/ClassicBtn';
 import FavoriteBtn from '../Buttons/FavoriteBtn';
 import UpLink from '../Others/UpLink';
 import QuoteText from './QuoteText';
-import { ucs2 } from 'punycode';
 
 const isTextOverflow = (quote_id) => {
   return (

@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { VscHeart } from 'react-icons/vsc';
 import { VscHeartFilled } from 'react-icons/vsc';
