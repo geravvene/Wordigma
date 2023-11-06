@@ -10,6 +10,7 @@ const client = new MongoClient("mongodb://127.0.0.1:27017/");
 const db = client.db("Wordigma");
 
 const app = express();
+
 app.use(express.json());
 app.use(function (req, res, next) {
   res.setHeader("Access-Control-Allow-Origin", "http://localhost:5173");

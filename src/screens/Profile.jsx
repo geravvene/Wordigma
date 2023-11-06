@@ -8,7 +8,9 @@ import useActions from '../hooks/useActions.jsx';
 
 const Profile = () => {
   const user = useSelector((state) => state.userReducer);
+
   const { change, clearFavorite } = useActions();
+  
   return !user ? (
     <Navigate to="/reg" />
   ) : (

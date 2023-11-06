@@ -4,6 +4,7 @@ import Quote from './Quote';
 
 const QuotesColumn = ({ data, user, width }) => {
   const [openId, setOpenId] = useState(false);
+  
   return (
     <>
       <div className={`col-span-12 sm:col-span-6 lg:col-span-4 flexcol gap-6`}>

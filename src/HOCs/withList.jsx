@@ -63,12 +63,16 @@ const getSort = (a, b, sort) => {
 
 export const withList = (Component) => (props) => {
   const [search, setSearch] = useState(``);
+
   const [filter, setFilter] = useState();
+
   const [sort, setSort] = useState();
+
   const data = props.data
     ?.filter((n) => getFilter(n, filter))
     .sort((a, b) => getSort(a, b, sort))
     .filter((n) => n[props.search].match(new RegExp(search, `i`)));
+    
   return (
     <>
       <Title text={props.title}>

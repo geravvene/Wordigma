@@ -33,18 +33,25 @@ const HeaderPositionController = (head) => {
 
 const Header = () => {
   const { pathname } = useLocation();
+
   const [isNavActive, setIsNavActive] = useState(false);
+
   const head = useRef(null);
+
   useEffect(() => {
     HeaderPositionController(head);
   }, []);
+
   const setStateTrue = useCallback(() => {
     setIsNavActive(true);
   }, []);
+
   const setStateFalse = useCallback(() => {
     setIsNavActive(false);
   }, []);
+
   const toggleState = () => setIsNavActive(!isNavActive);
+  
   return (
     <>
       <header

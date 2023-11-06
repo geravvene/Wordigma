@@ -16,6 +16,7 @@ export async function putController(app, db, ObjectId) {
       res.sendStatus(500);
     }
   });
+  
   app.put("/users/:id/favorite/:mode", async (req, res) => {
     try {
       res.send(

@@ -32,6 +32,7 @@ const Entry = ({ setText, setUser }) => {
             onError: (error) => setText(error.message),
           }
     );
+
   const handleChangeData = useCallback(
     (data) => {
       setUser
@@ -43,6 +44,7 @@ const Entry = ({ setText, setUser }) => {
           });
     },
     [setUser, setText]
+    
   );
   return (
     <>

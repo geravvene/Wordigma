@@ -7,11 +7,13 @@ import Quotes from './Quotes';
 
 const QuotesList = ({ title, author }) => {
   const user_id = useSelector((state) => state.userReducer._id);
+
   const { data, isLoading, isFetching } = useQuery(
     [title],
     () => DataService.getData(types.get(title).path(user_id)),
     { enabled: !author }
   );
+  
   return (
     <>
       <Quotes

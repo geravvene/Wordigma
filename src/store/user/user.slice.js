@@ -12,6 +12,7 @@ export const userSlice = createSlice({
       window.localStorage.setItem(`user`, JSON.stringify(payload));
       return payload;
     },
+
     toggleFavorite: (state, { payload }) => {
       const favorite = state.favorite;
       if (favorite.includes(payload)) {
@@ -26,6 +27,7 @@ export const userSlice = createSlice({
         state.favorite = favorite.concat([payload]);
       }
     },
+    
     clearFavorite: (state) => {
       DataService.updateData(`users/${state._id}/clear/favorite`);
       state.favorite = [];

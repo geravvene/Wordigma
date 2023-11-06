@@ -12,6 +12,7 @@ const isTextOverflow = (quote_id) => {
     125 - (window.location.href.includes(`authors`) ? 0 : 25)
   );
 };
+
 const QuoteSizeController = (quote_id, open, setOpen, width) => {
   if (open.isOpen && !open.wasOpen) {
     $(`#${quote_id}`).css({
@@ -46,17 +47,21 @@ const QuoteSizeController = (quote_id, open, setOpen, width) => {
 
 const Quote = ({ quote, user, openId, setOpenId, width }) => {
   const [open, setOpen] = useState({ isOpen: false, wasOpen: false });
+
   useEffect(() => {
     if (openId != quote._id) setOpen({ ...open, isOpen: false });
     else setOpen({ ...open, isOpen: true });
   }, [openId]);
+
   useEffect(
     () => QuoteSizeController(quote._id, open, setOpen, width),
     [open.isOpen, width]
   );
+
   const handleSetOpenId = useCallback(() => {
     setOpenId(quote._id == openId ? null : quote._id);
   }, [setOpenId]);
+  
   return (
     <>
       <div

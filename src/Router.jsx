@@ -18,7 +18,9 @@ import CreatePage from './screens/CreatePage';
 
 const Router = () => {
   const user_id = useSelector((state) => state.userReducer?._id);
+
   const { change } = useActions();
+  
   useQuery(['user'], () => DataService.getData(`/users/${user_id}`), {
     enabled: !!user_id,
     onSuccess: (data) => change(data),

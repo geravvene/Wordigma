@@ -21,11 +21,13 @@ export const useMutateForm = (path, check, options, func) => {
     reset,
     formState: { isSubmitting, errors },
   } = useForm({ mode: `onChange`, criteriaMode: 'all' });
+  
   const { mutate } = useMutation(
     [`${path} mutate`],
     async (data) => postData(data, path, check, func),
     options
   );
+
   return {
     errors,
     register,

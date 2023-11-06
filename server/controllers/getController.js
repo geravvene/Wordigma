@@ -9,6 +9,7 @@ export async function getController(app, db, ObjectId) {
       res.sendStatus(500);
     }
   });
+
   app.get('/quotes/:mode/:id', async (req, res) => {
     try {
       res.send(
@@ -31,6 +32,7 @@ export async function getController(app, db, ObjectId) {
       res.sendStatus(500);
     }
   });
+
   app.get('/:col', async (req, res) => {
     try {
       res.send(
@@ -41,6 +43,7 @@ export async function getController(app, db, ObjectId) {
       res.sendStatus(500);
     }
   });
+
   app.get('/:col/:id', async (req, res) => {
     try {
       res.send(
@@ -56,6 +59,7 @@ export async function getController(app, db, ObjectId) {
       res.sendStatus(500);
     }
   });
+
   app.get('/filter/:col/:filter', async (req, res) => {
     try {
       res.send(
@@ -69,6 +73,7 @@ export async function getController(app, db, ObjectId) {
       res.sendStatus(500);
     }
   });
+  
   app.get('/:col/:id/:property', async (req, res) => {
     try {
       res.send(

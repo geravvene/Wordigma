@@ -8,19 +8,23 @@ import ClassicBtn from '../Buttons/ClassicBtn';
 
 const SelectionBar = ({ sorts, filters, fltr, setFilter, srt, setSort }) => {
   const [active, setActive] = useState(false);
+
   const handleSetFilter = useCallback(
     (e) => {
       setFilter(e.target.textContent);
     },
     [setFilter]
   );
+
   const handleSetSort = useCallback(
     (e) => {
       setSort(e.target.textContent);
     },
     [setSort]
   );
+
   const toggleActive = () => setActive(!active);
+  
   return (
     <>
       <div

@@ -4,8 +4,11 @@ import QuotesColumn from './QuotesColumn';
 
 const Quotes = ({ data, user }) => {
   const width = useResize();
+
   let list = [];
+
   let amount = width >= 1024 ? 3 : width >= 640 ? 2 : 1;
+
   for (let i = 0; i < amount; i++) {
     list.push(
       <QuotesColumn
@@ -16,6 +19,7 @@ const Quotes = ({ data, user }) => {
       />
     );
   }
+  
   return list;
 };
 export default withList(Quotes);

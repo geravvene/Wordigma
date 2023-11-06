@@ -19,9 +19,11 @@ const CreateAuthor = ({ setText }) => {
       },
       DataService.postDataWithFile
     );
+
   const changeData = useCallback((data) => {
     mutate({ ...data, img: data.img.item(0) });
   }, []);
+  
   return (
     <>
       <Form

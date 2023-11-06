@@ -10,6 +10,7 @@ const CreateQuote = ({ setText }) => {
   const { data, isLoading, isFetching } = useQuery([`authors`], () =>
     DataService.getData(`authors`)
   );
+
   const { errors, register, mutate, isSubmitting, handleSubmit, reset } =
     useMutateForm('quotes', 'text', {
       onSuccess: () => {
@@ -18,6 +19,7 @@ const CreateQuote = ({ setText }) => {
       },
       onError: (error) => setText(error.message),
     });
+    
   const changeData = useCallback((data) => {
     mutate({ ...data, author: JSON.parse(data.author) });
   }, []);

@@ -10,10 +10,13 @@ const FavoriteBtn = ({ quote_id }) => {
   const isFavorite = useSelector(
     (state) => state.userReducer.favorite
   ).includes(quote_id);
+
   const { toggleFavorite } = useActions();
+
   const handleToggleFavorite = useCallback(() => {
     toggleFavorite(quote_id);
   }, [toggleFavorite]);
+  
   return (
     <>
       <ClassicBtn

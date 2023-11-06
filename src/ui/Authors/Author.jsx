@@ -6,6 +6,7 @@ const Author = ({ author }) => {
   const onHover = useCallback(() => {
     $(`#author${author._id}`).toggleClass(`h-[30%]`);
   }, []);
+
   return (
     <>
       <div
@@ -29,4 +30,5 @@ const Author = ({ author }) => {
     </>
   );
 };
+
 export default Author;

@@ -6,7 +6,9 @@ import LiOption from '../Options/LiOption';
 
 const Navbar = ({ isActive, setClose, refs, location }) => {
   const user_img = useSelector((state) => state.userReducer?.img);
+
   const navigate = useNavigate();
+  
   return (
     <>
       <div

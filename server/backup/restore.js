@@ -14,7 +14,9 @@ const client = new MongoClient('mongodb://127.0.0.1:27017/');
 })();
 
 const db = client.db('Wordigma');
+
 let quotes = [];
+
 authors.forEach((obj) => {
   let index = 0;
   obj.quotes.forEach((quote) => {
@@ -34,7 +36,9 @@ authors.forEach((obj) => {
   });
   obj._id = new ObjectId(obj._id.$oid);
 });
+
 users.forEach((obj) => (obj._id = new ObjectId(obj._id.$oid)));
+
 await db.collection('authors').insertMany(authors);
 await db.collection('quotes').insertMany(quotes);
 await db.collection('users').insertMany(users);

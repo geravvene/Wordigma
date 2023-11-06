@@ -9,9 +9,11 @@ import QuotesList from '../ui/Quotes/QuotesList.jsx';
 
 const AuthorPage = () => {
   const { id } = useParams();
+
   const { data, isLoading, isFetching } = useQuery([`author`], () =>
     DataService.getData(`authors/${id}`)
   );
+  
   return isLoading || isFetching ? (
     <p>Loading...</p>
   ) : (

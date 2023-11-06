@@ -31,6 +31,7 @@ export async function postController(app, db, ObjectId) {
       res.sendStatus(500);
     }
   });
+  
   app.post("/authors", upload.single("img"), async (req, res) => {
     try {
       const file = req.file;
@@ -62,6 +63,7 @@ export async function postController(app, db, ObjectId) {
       res.sendStatus(500);
     }
   });
+
   app.post("/:col", async (req, res) => {
     try {
       res.send(await db.collection(req.params.col).insertOne(req.body));

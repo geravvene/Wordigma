@@ -11,6 +11,7 @@ const AuthorList = () => {
   const { data, isLoading, isFetching } = useQuery([`authors`], () =>
     DataService.getData(`authors`)
   );
+
   return isLoading || isFetching ? (
     <p>Loading...</p>
   ) : (
@@ -26,4 +27,5 @@ const AuthorList = () => {
     </>
   );
 };
+
 export default AuthorList;

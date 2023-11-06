@@ -26,4 +26,5 @@ const ClassicBtn = ({
     </>
   );
 };
+
 export default ClassicBtn;

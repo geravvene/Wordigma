@@ -6,6 +6,7 @@ import FormPage from '../ui/Forms/FormPage';
 
 const CreatePage = () => {
   const [text, setText] = useState('Введите данные');
+  
   return (
     <>
       <FormPage text={text}>
