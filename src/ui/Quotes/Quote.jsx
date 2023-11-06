@@ -1,10 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { VscChevronDown } from 'react-icons/vsc';
 
 import ClassicBtn from '../Buttons/ClassicBtn';
 import FavoriteBtn from '../Buttons/FavoriteBtn';
 import UpLink from '../Others/UpLink';
 import QuoteText from './QuoteText';
+import { ucs2 } from 'punycode';
 
 const isTextOverflow = (quote_id) => {
   return (
@@ -54,6 +55,9 @@ const Quote = ({ quote, user, openId, setOpenId, width }) => {
     () => QuoteSizeController(quote._id, open, setOpen, width),
     [open.isOpen, width]
   );
+  const handleSetOpenId = useCallback(() => {
+    setOpenId(quote._id == openId ? null : quote._id);
+  }, [setOpenId]);
   return (
     <>
       <div
@@ -82,10 +86,7 @@ const Quote = ({ quote, user, openId, setOpenId, width }) => {
            `}
             >
               <ClassicBtn
-                arg={{
-                  onClick: () =>
-                    setOpenId(quote._id == openId ? null : quote._id),
-                }}
+                func={handleSetOpenId}
                 padding={``}
                 rounded={`round`}
                 shadow={`shadow-black shadow`}
