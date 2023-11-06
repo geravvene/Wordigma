@@ -72,7 +72,7 @@ const Quote = ({ quote, user, openId, setOpenId, width }) => {
           </QuoteText>
 
           <div className={`min-w-fit flex flex-col items-center`}>
-            {user ? <FavoriteBtn quote={quote._id} /> : null}
+            {user ? <FavoriteBtn quote_id={quote._id} /> : null}
 
             <div
               id={`more${quote._id}`}
