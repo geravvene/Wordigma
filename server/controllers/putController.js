@@ -18,12 +18,13 @@ export async function putController(app, db, ObjectId) {
   });
   app.put("/users/:id/favorite/:mode", async (req, res) => {
     try {
+      console.log(req.body.id)
       res.send(
         await db.collection("users").updateOne(
           { _id: new ObjectId(req.params.id) },
           {
             [`${req.params.mode == "add" ? "$addToSet" : "$pull"}`]: {
-              favorite: new ObjectId(req.body._id),
+              favorite: new ObjectId(req.body.id),
             },
           }
         )

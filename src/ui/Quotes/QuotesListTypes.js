@@ -1,22 +1,22 @@
-const sorts = [`Дата добавления`, `Длина больше`, `Длина меньше`, ];
+const sorts = [`Дата добавления`, `Длина больше`, `Длина меньше`];
 const filters = [`Избранное`, `Неизбранное`];
 export const types = new Map([
   [
-    "Цитаты",
+    'Цитаты',
     {
       sorts: sorts.slice(1),
-      path: (user) => (user._id ? `quotes/rec/${user._id}` : `quotes`),
+      path: (user) => (user ? `quotes/rec/${user._id}` : `quotes`),
     },
   ],
   [
-    "Избранные цитаты",
+    'Избранные цитаты',
     {
       sorts: sorts,
       path: (user) => `quotes/fav/${user._id}`,
     },
   ],
   [
-    "Цитаты автора",
+    'Цитаты автора',
     {
       sorts: sorts,
       filters: filters,

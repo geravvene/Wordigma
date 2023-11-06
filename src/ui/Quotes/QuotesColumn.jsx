@@ -1,5 +1,5 @@
-import Quote from "./Quote";
-import { useState } from "react";
+import Quote from './Quote';
+import { useState } from 'react';
 
 const QuotesColumn = ({ data, user, width }) => {
   const [openId, setOpenId] = useState(false);

@@ -1,29 +1,15 @@
-import Title from "../ui/Title.jsx";
-import { DataService } from "../services/data.service.jsx";
-import { useMutation } from "react-query";
-import ClassicBtn from "../ui/Buttons/ClassicBtn.jsx";
-import QuotesList from "../ui/Quotes/QuotesList.jsx";
-import { useQueryClient } from "react-query";
-import { useAuth } from "../hooks/useAuth.jsx";
-import { Navigate } from "react-router-dom";
-import { FuncService } from "../services/func.service.jsx";
-import { Link } from "react-router-dom";
+import Title from '../ui/Title.jsx';
+import ClassicBtn from '../ui/Buttons/ClassicBtn.jsx';
+import QuotesList from '../ui/Quotes/QuotesList.jsx';
+import { useSelector } from 'react-redux';
+import { Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import useActions from '../hooks/useActions.jsx';
 
 const Profile = () => {
-  const { user, setUser } = useAuth();
-  const queryClient = useQueryClient();
-  const { mutate } = useMutation(
-    [`create acc`],
-    () => DataService.updateData(`users/${user._id}/clear/favorite`),
-    {
-      onSuccess: async () => {
-        queryClient.invalidateQueries(`Избранные цитаты`);
-        FuncService.UpdateLocalFavorite(`clear`);
-      },
-    }
-  );
-
-  return !user.name ? (
+  const user = useSelector((state) => state.userReducer);
+  const { change, clearFavorite } = useActions();
+  return !user ? (
     <Navigate to="/reg" />
   ) : (
     <>
@@ -37,7 +23,7 @@ const Profile = () => {
           />
           <div className={`flexcol justify-between pb-[0.1rem] `}>
             <ClassicBtn
-              arg={{ onClick: () => setUser({}) }}
+              arg={{ onClick: () => change(null) }}
               rounded={`rounded-md`}
               color={`bg-red`}
               className={`w-full`}
@@ -45,7 +31,7 @@ const Profile = () => {
               Выход
             </ClassicBtn>
             <ClassicBtn
-              arg={{ onClick: mutate }}
+              arg={{ onClick: () => clearFavorite() }}
               rounded={`rounded-lg`}
               color={`bg-blue`}
             >

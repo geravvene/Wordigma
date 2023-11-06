@@ -1,12 +1,10 @@
-import CreateQuote from "../ui/Forms/CreateQuote";
-import CreateAuthor from "../ui/Forms/CreateAuthor";
-import { useState } from "react";
-import FormPage from "../ui/Forms/FormPage";
+import CreateQuote from '../ui/Forms/CreateQuote';
+import CreateAuthor from '../ui/Forms/CreateAuthor';
+import { useState } from 'react';
+import FormPage from '../ui/Forms/FormPage';
 
 const CreatePage = () => {
-  const [text, setText] = useState(
-    "Введите данные"
-  );
+  const [text, setText] = useState('Введите данные');
   return (
     <>
       <FormPage text={text}>

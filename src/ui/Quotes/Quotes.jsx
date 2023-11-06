@@ -1,6 +1,6 @@
-import { withList } from "../../HOCs/withList";
-import useResize from "../../hooks/useResize";
-import QuotesColumn from "./QuotesColumn";
+import { withList } from '../../HOCs/withList';
+import useResize from '../../hooks/useResize';
+import QuotesColumn from './QuotesColumn';
 
 const Quotes = ({ data, user }) => {
   const width = useResize();

@@ -1,11 +1,11 @@
-import { FuncService } from "../../services/func.service";
-import Input from "./Input";
-import Form from "./Form";
-import { useMutateForm } from "../../hooks/useMutateForm";
+import { FuncService } from '../../services/func.service';
+import Input from './Input';
+import Form from './Form';
+import { useMutateForm } from '../../hooks/useMutateForm';
 
 async function checkAuthorization(acc, setUser, setText) {
   FuncService.checkExistence(
-    `users/filter/${JSON.stringify({ name: acc.name })}`
+    `filter/users/${JSON.stringify({ name: acc.name })}`
   ).then((data) => {
     data
       ? data[0].password == acc.password
@@ -18,13 +18,13 @@ async function checkAuthorization(acc, setUser, setText) {
 const Entry = ({ setText, setUser }) => {
   const { errors, register, mutate, isSubmitting, handleSubmit, reset } =
     useMutateForm(
-      "users",
-      "name",
+      'users',
+      'name',
       setUser
         ? { onError: (error) => setText(error.message) }
         : {
             onSuccess: () => {
-              setText("Пользователь успешно зарегистрирован");
+              setText('Пользователь успешно зарегистрирован');
               reset();
             },
             onError: (error) => setText(error.message),
@@ -51,7 +51,7 @@ const Entry = ({ setText, setUser }) => {
         button={{
           disabled: isSubmitting,
           color: setUser ? `bg-green` : `bg-blue`,
-          type: "submit",
+          type: 'submit',
         }}
         text={setUser ? `Войти` : `Зарегистрироваться`}
         title={setUser ? `Вход` : `Регистрация`}
@@ -63,11 +63,11 @@ const Entry = ({ setText, setUser }) => {
               required: `Имя необходимо`,
               minLength: {
                 value: 4,
-                message: "Минимум 4 символа",
+                message: 'Минимум 4 символа',
               },
               maxLength: {
                 value: 10,
-                message: "Максимум 10 символов",
+                message: 'Максимум 10 символов',
               },
             })}
             errors={errors}
@@ -80,11 +80,11 @@ const Entry = ({ setText, setUser }) => {
               required: `Пароль необходим`,
               minLength: {
                 value: 6,
-                message: "Минимум 6 символов",
+                message: 'Минимум 6 символов',
               },
               pattern: {
                 value: /[\d]+/,
-                message: "Содержит хотя бы одно число",
+                message: 'Содержит хотя бы одно число',
               },
             })}
             errors={errors}

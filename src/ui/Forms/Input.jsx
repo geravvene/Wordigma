@@ -1,7 +1,6 @@
-import { ErrorMessage } from "@hookform/error-message";
+import { ErrorMessage } from '@hookform/error-message';
 
-const Input = ({name, register, errors, arg}) => {
-  
+const Input = ({ name, register, errors, arg }) => {
   return (
     <>
       <input

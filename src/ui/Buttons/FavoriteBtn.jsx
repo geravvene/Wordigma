@@ -1,51 +1,24 @@
-import React from "react";
-import { useState } from "react";
-import { DataService } from "../../services/data.service";
-import { useEffect } from "react";
-import ClassicBtn from "./ClassicBtn";
-import { useMutation } from "react-query";
-import { VscHeart } from "react-icons/vsc";
-import { VscHeartFilled } from "react-icons/vsc";
-import { FuncService } from "../../services/func.service";
+import React from 'react';
+import ClassicBtn from './ClassicBtn';
+import { VscHeart } from 'react-icons/vsc';
+import { VscHeartFilled } from 'react-icons/vsc';
+import useActions from '../../hooks/useActions';
+import { useSelector } from 'react-redux';
 
-const FavoriteBtn = ({ quote, user }) => {
-  const [favorite, setFavorite] = useState();
-  useEffect(() => {
-    const fetchData = async () => {
-      window.location.href.includes(`acc`)
-        ? setFavorite(true)
-        : window.location.href.includes("rec")
-        ? setFavorite(false)
-        : setFavorite(FuncService.checkFavorite(quote._id));
-    };
-    fetchData();
-  }, []);
-  const { mutate } = useMutation(
-    [`update favorite`],
-    () =>
-      DataService.updateData(
-        `users/${user._id}/favorite/${!favorite ? `add` : `del`}`,
-        quote
-      ),
-    {
-      onMutate: async () => {
-        FuncService.UpdateLocalFavorite(
-          `${!favorite ? `add` : `del`}`,
-          quote._id
-        );
-        setFavorite(!favorite);
-      },
-    }
-  );
+const FavoriteBtn = ({ quote }) => {
+  const isFavorite = useSelector(
+    (state) => state.userReducer.favorite
+  ).includes(quote._id);
+  const { toggleFavorite } = useActions();
   return (
     <>
       <ClassicBtn
-        arg={{ onClick: mutate }}
+        arg={{ onClick: () => toggleFavorite(quote._id) }}
         rounded={`rounded-tr-md rounded-bl-xl`}
         shadow={`shadow shadow-black`}
-        color={favorite ? `bg-green` : `bg-blue`}
+        color={isFavorite ? `bg-green` : `bg-blue`}
       >
-        {favorite ? (
+        {isFavorite ? (
           <VscHeartFilled size={`1.25rem`} color="white" />
         ) : (
           <VscHeart size={`1.25rem`} color="white" />

@@ -1,4 +1,4 @@
-import device from "current-device";
+import device from 'current-device';
 const ClassicBtn = ({
   children,
   color,

@@ -1,10 +1,10 @@
-import { useAuth } from "../../hooks/useAuth";
-import LiOption from "../LiOption";
-import { useNavigate } from "react-router-dom";
-import UlMenu from "../UlMenu";
+import { useSelector } from 'react-redux';
+import LiOption from '../LiOption';
+import { useNavigate } from 'react-router-dom';
+import UlMenu from '../UlMenu';
 
 const Navbar = ({ isActive, setIsActive, refs, location }) => {
-  const { user } = useAuth();
+  const user = useSelector((state) => state.userReducer);
   const navigate = useNavigate();
   return (
     <>
@@ -21,7 +21,7 @@ const Navbar = ({ isActive, setIsActive, refs, location }) => {
             arg={{ onClick: () => navigate(refs[1].href) }}
           >
             {refs[1].value}
-            {user.img ? (
+            {user?.img ? (
               <img
                 alt={`acc_icon`}
                 className={`rounded-md w-5 h-5 ml-3`}

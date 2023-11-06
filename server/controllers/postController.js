@@ -7,7 +7,6 @@ const upload = multer();
 export async function postController(app, db, ObjectId) {
   app.post("/quotes", async (req, res) => {
     try {
-      console.log(req.body);
       const id = new ObjectId();
       await db.collection("authors").updateOne(
         { _id: new ObjectId(req.body.author._id) },

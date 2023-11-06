@@ -1,8 +1,8 @@
-import ClassicBtn from "../Buttons/ClassicBtn";
-import { VscSortPrecedence } from "react-icons/vsc";
-import { useState } from "react";
-import LiOption from "../LiOption";
-import UlMenu from "../UlMenu";
+import ClassicBtn from '../Buttons/ClassicBtn';
+import { VscSortPrecedence } from 'react-icons/vsc';
+import { useState } from 'react';
+import LiOption from '../LiOption';
+import UlMenu from '../UlMenu';
 
 const SelectionBar = ({ sorts, filters, fltr, setFilter, srt, setSort }) => {
   const [active, setActive] = useState(false);

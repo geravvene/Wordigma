@@ -1,7 +1,6 @@
-import Title from "../ui/Title.jsx";
-import SelectionBar from "../ui/Options/SelectionBar.jsx";
-import { useState } from "react";
-
+import Title from '../ui/Title.jsx';
+import SelectionBar from '../ui/Options/SelectionBar.jsx';
+import { useState } from 'react';
 
 const getFilter = (n, filter) => {
   switch (filter) {

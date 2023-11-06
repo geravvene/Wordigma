@@ -1,17 +1,19 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import Router from "./Router.jsx";
-import AuthProvider from "./providers/AuthProvider.jsx";
-import { QueryClient, QueryClientProvider } from "react-query";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import Router from './Router.jsx';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { Provider } from 'react-redux';
 
-const queryClient=new QueryClient()
+import store from './store/store.js';
 
-ReactDOM.createRoot(document.getElementById("root")).render(
+const queryClient = new QueryClient();
+
+ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-    <AuthProvider>
-      <Router />
-    </AuthProvider>
+      <Provider store={store}>
+        <Router />
+      </Provider>
     </QueryClientProvider>
   </React.StrictMode>
 );

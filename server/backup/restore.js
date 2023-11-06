@@ -1,9 +1,9 @@
-import authors from "./Wordigma.authors.json" assert { type: "json" };
-import users from "./Wordigma.users.json" assert { type: "json" };
-import { ObjectId } from "mongodb";
-import { MongoClient } from "mongodb";
+import authors from './Wordigma.authors.json' assert { type: 'json' };
+import users from './Wordigma.users.json' assert { type: 'json' };
+import { ObjectId } from 'mongodb';
+import { MongoClient } from 'mongodb';
 
-const client = new MongoClient("mongodb://127.0.0.1:27017/");
+const client = new MongoClient('mongodb://127.0.0.1:27017/');
 
 (async () => {
   try {
@@ -13,7 +13,7 @@ const client = new MongoClient("mongodb://127.0.0.1:27017/");
   }
 })();
 
-const db = client.db("Wordigma");
+const db = client.db('Wordigma');
 let quotes = [];
 authors.forEach((obj) => {
   let index = 0;
@@ -35,10 +35,10 @@ authors.forEach((obj) => {
   obj._id = new ObjectId(obj._id.$oid);
 });
 users.forEach((obj) => (obj._id = new ObjectId(obj._id.$oid)));
-await db.collection("authors").insertMany(authors);
-await db.collection("quotes").insertMany(quotes);
-await db.collection("users").insertMany(users);
+await db.collection('authors').insertMany(authors);
+await db.collection('quotes').insertMany(quotes);
+await db.collection('users').insertMany(users);
 
-console.log("База данных создана");
+console.log('База данных создана');
 client.close();
 process.exit();

@@ -1,10 +1,10 @@
-import FavoriteBtn from "../Buttons/FavoriteBtn";
-import { useState } from "react";
-import { VscChevronDown } from "react-icons/vsc";
-import ClassicBtn from "../Buttons/ClassicBtn";
-import { useEffect } from "react";
-import UpLink from "../UpLink";
-import QuoteText from "./QuoteText";
+import FavoriteBtn from '../Buttons/FavoriteBtn';
+import { useState } from 'react';
+import { VscChevronDown } from 'react-icons/vsc';
+import ClassicBtn from '../Buttons/ClassicBtn';
+import { useEffect } from 'react';
+import UpLink from '../UpLink';
+import QuoteText from './QuoteText';
 
 const isTextOverflow = (quote_id) => {
   return (
@@ -63,7 +63,7 @@ const Quote = ({ quote, user, openId, setOpenId, width }) => {
       >
         <div
           className={`flex justify-between h-full overflow-hidden ${
-            window.location.href.includes("authors")
+            window.location.href.includes('authors')
               ? `mb-[0.25rem]`
               : `mb-[25px]`
           }`}
@@ -74,12 +74,12 @@ const Quote = ({ quote, user, openId, setOpenId, width }) => {
           </QuoteText>
 
           <div className={`min-w-fit flex flex-col items-center`}>
-            {user.name ? <FavoriteBtn quote={quote} user={user} /> : <></>}
+            {user ? <FavoriteBtn quote={quote} user={user} /> : <></>}
 
             <div
               id={`more${quote._id}`}
               className={`max-w-fit h-full items-center hidden ${
-                user.name ? `` : `mr-1`
+                user ? `` : `mr-1`
               }
            `}
             >

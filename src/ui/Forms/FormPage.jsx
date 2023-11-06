@@ -1,5 +1,5 @@
-import QuoteText from "../Quotes/QuoteText";
-import { useState } from "react";
+import QuoteText from '../Quotes/QuoteText';
+import { useState } from 'react';
 const FormPage = ({ children, text }) => {
   return (
     <div className={`absolute h-full w-full flexcol`}>

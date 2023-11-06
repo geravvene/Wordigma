@@ -1,17 +1,17 @@
-import { DataService } from "../../services/data.service";
-import Input from "./Input";
-import { useQuery } from "react-query";
-import Form from "./Form";
-import { useMutateForm } from "../../hooks/useMutateForm";
+import { DataService } from '../../services/data.service';
+import Input from './Input';
+import { useQuery } from 'react-query';
+import Form from './Form';
+import { useMutateForm } from '../../hooks/useMutateForm';
 
 const CreateQuote = ({ setText }) => {
   const { data, isLoading, isFetching } = useQuery([`authors`], () =>
     DataService.getData(`authors`)
   );
   const { errors, register, mutate, isSubmitting, handleSubmit, reset } =
-    useMutateForm("quotes", "text", {
+    useMutateForm('quotes', 'text', {
       onSuccess: () => {
-        setText("Цитата добавлена");
+        setText('Цитата добавлена');
         reset();
       },
       onError: (error) => setText(error.message),
@@ -27,9 +27,9 @@ const CreateQuote = ({ setText }) => {
             mutate({ ...data, author: JSON.parse(data.author) })
           ),
         }}
-        button={{ disabled: isSubmitting, color: "bg-blue", type: "submit" }}
-        text={"Создать"}
-        title={"Создать Цитату"}
+        button={{ disabled: isSubmitting, color: 'bg-blue', type: 'submit' }}
+        text={'Создать'}
+        title={'Создать Цитату'}
       >
         <div className={`flexcol w-full col-span-6 gap-3`}>
           <Input
@@ -38,11 +38,11 @@ const CreateQuote = ({ setText }) => {
               required: `Текст необходим`,
               minLength: {
                 value: 4,
-                message: "Минимум 4 символа",
+                message: 'Минимум 4 символа',
               },
               maxLength: {
                 value: 500,
-                message: "Максимум 500 символов",
+                message: 'Максимум 500 символов',
               },
             })}
             errors={errors}

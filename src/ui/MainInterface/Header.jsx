@@ -1,11 +1,11 @@
-import logo from "../../assets/images/site/logo.png";
-import Navbar from "./Navbar.jsx";
-import { useRef, useState } from "react";
-import { useEffect } from "react";
-import ClassicBtn from "../Buttons/ClassicBtn";
-import { VscThreeBars } from "react-icons/vsc";
-import device from "current-device";
-import { useLocation } from "react-router-dom";
+import logo from '../../assets/images/site/logo.png';
+import Navbar from './Navbar.jsx';
+import { useRef, useState } from 'react';
+import { useEffect } from 'react';
+import ClassicBtn from '../Buttons/ClassicBtn';
+import { VscThreeBars } from 'react-icons/vsc';
+import device from 'current-device';
+import { useLocation } from 'react-router-dom';
 
 const refs = [
   { value: `Авторизация`, href: `reg` },
@@ -31,7 +31,7 @@ const HeaderPositionController = (head) => {
 };
 
 const Header = () => {
-  const {pathname} = useLocation();
+  const { pathname } = useLocation();
   const [isNavActive, setIsNavActive] = useState(false);
   const head = useRef(null);
   useEffect(() => {

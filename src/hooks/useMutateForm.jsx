@@ -1,7 +1,7 @@
-import { DataService } from "../services/data.service";
-import { useForm } from "react-hook-form";
-import { useMutation } from "react-query";
-import { FuncService } from "../services/func.service";
+import { DataService } from '../services/data.service';
+import { useForm } from 'react-hook-form';
+import { useMutation } from 'react-query';
+import { FuncService } from '../services/func.service';
 
 async function postData(data, path, check, func) {
   if (
@@ -10,7 +10,7 @@ async function postData(data, path, check, func) {
     )
   )
     throw new Error(`${check} занято`);
-  return await func ? func(path, data) : DataService.postData(path, data);
+  return (await func) ? func(path, data) : DataService.postData(path, data);
 }
 
 export const useMutateForm = (path, check, options, func) => {
@@ -19,7 +19,7 @@ export const useMutateForm = (path, check, options, func) => {
     handleSubmit,
     reset,
     formState: { isSubmitting, errors },
-  } = useForm({ mode: `onChange`, criteriaMode: "all" });
+  } = useForm({ mode: `onChange`, criteriaMode: 'all' });
   const { mutate } = useMutation(
     [`${path} mutate`],
     async (data) => postData(data, path, check, func),

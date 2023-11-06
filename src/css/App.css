@@ -36,6 +36,6 @@
 .shadows {
   @apply shadow-black shadow-md;
 }
-.round{
-  @apply rounded-t-md rounded-b-xl
+.round {
+  @apply rounded-t-md rounded-b-xl;
 }
