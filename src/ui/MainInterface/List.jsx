@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 import Title from '../Others/Title.jsx';
 import SelectionBar from '../Options/SelectionBar.jsx';
@@ -76,13 +76,17 @@ export const List = ({
     .sort((a, b) => getSort(a, b, sort))
     .filter((n) => n[currentSearch].match(new RegExp(search, `i`)));
 
+  const handleSearch = useCallback((e) => {
+    setSearch(e.target.value);
+  }, []);
+  
   return (
     <>
       <Title text={title}>
         <input
           className="input ml-3 mt-[0.15rem]"
           placeholder={`Search...`}
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={handleSearch}
         />
 
         <SelectionBar
