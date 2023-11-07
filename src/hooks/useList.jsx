@@ -1,5 +1,5 @@
+import { DataService } from '../services/data.service';
 import { useState } from 'react';
-
 import Title from '../ui/Others/Title.jsx';
 import SelectionBar from '../ui/Options/SelectionBar.jsx';
 
@@ -61,6 +61,32 @@ const getSort = (a, b, sort) => {
   }
 };
 
+export const useList = (path, check, options, func) => {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { isSubmitting, errors },
+  } = useForm({ mode: `onChange`, criteriaMode: 'all' });
+  
+  const { mutate } = useMutation(
+    [`${path} mutate`],
+    async (data) => postData(data, path, check, func),
+    options
+  );
+
+  return {
+    errors,
+    register,
+    mutate,
+    isSubmitting,
+    handleSubmit,
+    reset,
+  };
+};
+
+
+
 export const withList = (Component) => (props) => {
   const [search, setSearch] = useState(``);
 
@@ -105,3 +131,4 @@ export const withList = (Component) => (props) => {
     </>
   );
 };
+

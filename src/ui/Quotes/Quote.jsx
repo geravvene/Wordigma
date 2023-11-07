@@ -60,7 +60,7 @@ const Quote = ({ quote, user, openId, setOpenId, width }) => {
 
   const handleSetOpenId = useCallback(() => {
     setOpenId(quote._id == openId ? null : quote._id);
-  }, [setOpenId]);
+  }, [setOpenId, openId]);
   
   return (
     <>

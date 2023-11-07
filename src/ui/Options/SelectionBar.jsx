@@ -48,7 +48,7 @@ const SelectionBar = ({ sorts, filters, fltr, setFilter, srt, setSort }) => {
                   ))}
                 </UlMenu>
               ) : (
-                <></>
+                null
               )}
               {sorts ? (
                 <UlMenu text={`Сортировка`}>
@@ -63,11 +63,11 @@ const SelectionBar = ({ sorts, filters, fltr, setFilter, srt, setSort }) => {
                   ))}
                 </UlMenu>
               ) : (
-                <></>
+                null
               )}
             </>
           ) : (
-            <></>
+            null
           )}
 
           <div>

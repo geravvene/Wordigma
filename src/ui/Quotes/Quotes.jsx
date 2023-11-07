@@ -1,4 +1,3 @@
-import { withList } from '../../HOCs/withList';
 import useResize from '../../hooks/useResize';
 import QuotesColumn from './QuotesColumn';
 
@@ -22,4 +21,4 @@ const Quotes = ({ data, user }) => {
   
   return list;
 };
-export default withList(Quotes);
+export default Quotes;
