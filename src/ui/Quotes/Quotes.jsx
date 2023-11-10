@@ -1,24 +1,23 @@
+import { useMemo } from 'react';
+
 import useResize from '../../hooks/useResize';
 import QuotesColumn from './QuotesColumn';
 
 const Quotes = ({ data, user }) => {
   const width = useResize();
 
-  let list = [];
+  const amount = width >= 1024 ? 3 : width >= 640 ? 2 : 1;
 
-  let amount = width >= 1024 ? 3 : width >= 640 ? 2 : 1;
+  const list = useMemo(
+    () =>
+      Array.from(Array(amount), (_, bigIndex) =>
+        data.filter((_, index) => !((index + amount - bigIndex) % amount))
+      ),
+    [amount]
+  );
 
-  for (let i = 0; i < amount; i++) {
-    list.push(
-      <QuotesColumn
-        key={i}
-        data={data.filter((item, index) => !((index + amount - i) % amount))}
-        user={user}
-        width={width}
-      />
-    );
-  }
-  
-  return list;
+  return list.map((dataColumn, index) => (
+    <QuotesColumn key={index} data={dataColumn} user={user} width={width} />
+  ));
 };
 export default Quotes;
