@@ -16,7 +16,9 @@ const QuotesList = ({ title, author }) => {
     () => DataService.getData(types.get(title).path(user_id)),
     { enabled: !author }
   );
+
   const currentQuotesList = currentList.bind(null, user_id);
+  
   return (
     <>
       <List
