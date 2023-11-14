@@ -1,5 +1,6 @@
-import ClassicBtn from '../Buttons/ClassicBtn';
-import Title from '../Others/Title';
+import ClassicBtn from '../../ui/buttons/ClassicBtn';
+import Title from '../Title';
+
 const Form = ({ children, text, button, arg, title, onSubmit }) => {
   return (
     <div className={`col-span-12 md:col-span-6`}>

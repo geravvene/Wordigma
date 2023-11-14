@@ -2,7 +2,7 @@ import { useQuery } from 'react-query';
 
 import { DataService } from '../../services/data.service';
 import Author from './Author';
-import { List } from '../MainInterface/List';
+import { List } from '../List';
 
 const sorts = [`По алфавиту`, `Количество цитат`];
 const filters = [`Есть избранное`];

@@ -1,10 +1,9 @@
 import { useState, useCallback } from 'react';
 import { VscSortPrecedence } from 'react-icons/vsc';
 
-
-import LiOption from './LiOption';
-import UlMenu from './UlMenu';
-import ClassicBtn from '../Buttons/ClassicBtn';
+import LiOption from '../ui/li/LiOption';
+import UlMenu from '../ui/ul/UlMenu';
+import ClassicBtn from '../ui/Buttons/ClassicBtn';
 
 const SelectionBar = ({ sorts, filters, fltr, setFilter, srt, setSort }) => {
   const [active, setActive] = useState(false);
@@ -24,7 +23,7 @@ const SelectionBar = ({ sorts, filters, fltr, setFilter, srt, setSort }) => {
   );
 
   const toggleActive = () => setActive(!active);
-  
+
   return (
     <>
       <div
@@ -47,9 +46,7 @@ const SelectionBar = ({ sorts, filters, fltr, setFilter, srt, setSort }) => {
                     </LiOption>
                   ))}
                 </UlMenu>
-              ) : (
-                null
-              )}
+              ) : null}
               {sorts ? (
                 <UlMenu text={`Сортировка`}>
                   {sorts.map((sort) => (
@@ -62,13 +59,9 @@ const SelectionBar = ({ sorts, filters, fltr, setFilter, srt, setSort }) => {
                     </LiOption>
                   ))}
                 </UlMenu>
-              ) : (
-                null
-              )}
+              ) : null}
             </>
-          ) : (
-            null
-          )}
+          ) : null}
 
           <div>
             <ClassicBtn

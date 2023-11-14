@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 
-import { FuncService } from '../../services/func.service';
+import { FuncService } from '../../utils/funcs';
 import Input from './Input';
 import Form from './Form';
 import { useMutateForm } from '../../hooks/useMutateForm';

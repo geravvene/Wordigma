@@ -2,7 +2,7 @@ import { DataService } from '../services/data.service';
 import { useForm } from 'react-hook-form';
 import { useMutation } from 'react-query';
 
-import { FuncService } from '../services/func.service';
+import { FuncService } from '../utils/funcs';
 
 async function postData(data, path, check, func) {
   if (

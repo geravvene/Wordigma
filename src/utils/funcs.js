@@ -1,4 +1,4 @@
-import { DataService } from './data.service';
+import { DataService } from '../services/data.service';
 
 export const FuncService = {
   getPropertyArray(data, property) {

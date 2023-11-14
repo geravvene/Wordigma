@@ -4,9 +4,9 @@ import { VscThreeBars } from 'react-icons/vsc';
 
 import device from 'current-device';
 
-import ClassicBtn from '../Buttons/ClassicBtn';
-import logo from '../../assets/images/site/logo.png';
-import Navbar from './Navbar.jsx';
+import ClassicBtn from './buttons/ClassicBtn';
+import logo from '../../assets/images/logo.png';
+import Navbar from './Navbar';
 
 const refs = [
   { value: `Авторизация`, href: `reg` },

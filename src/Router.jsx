@@ -1,30 +1,30 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import styles from './css/App.css';
-import Footer from './ui/MainInterface/Footer.jsx';
-import Header from './ui/MainInterface/Header.jsx';
-import AuthorPage from './screens/AuthorPage';
-import Authorization from './screens/Authorization';
-import Profile from './screens/Profile';
-import QuotesList from './ui/Quotes/QuotesList';
+import Footer from './ui/Footer.jsx';
+import Header from './ui/Header.jsx';
+import AuthorPage from './views/AuthorPage';
+import Authorization from './views/Authorization';
+import Profile from './views/Profile';
+import QuotesList from './components/Quotes/QuotesList';
 import { Navigate } from 'react-router-dom';
-import AuthorList from './ui/Authors/AuthorList';
-
+import AuthorList from './components/authors/AuthorList.jsx';
 import { useQuery } from 'react-query';
 import { useSelector } from 'react-redux';
 
 import useActions from './hooks/useActions';
 import { DataService } from './services/data.service';
-import CreatePage from './screens/CreatePage';
+import CreatePage from './views/CreatePage';
 
 const Router = () => {
   const user_id = useSelector((state) => state.userReducer?._id);
 
   const { change } = useActions();
-  
+
   useQuery(['user'], () => DataService.getData(`/users/${user_id}`), {
     enabled: !!user_id,
     onSuccess: (data) => change(data),
   });
+
   return (
     <>
       <BrowserRouter>

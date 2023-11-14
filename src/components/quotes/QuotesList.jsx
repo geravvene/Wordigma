@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { DataService } from '../../services/data.service';
 import { types } from './QuotesListTypes.js';
 import Quotes from './Quotes';
-import { List } from '../MainInterface/List.jsx';
+import { List } from '../List.jsx';
 
 const currentList = (user, data) => <Quotes data={data} user={user} />;
 

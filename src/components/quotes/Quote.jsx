@@ -1,9 +1,9 @@
 import { useState, useEffect, useCallback } from 'react';
 import { VscChevronDown } from 'react-icons/vsc';
 
-import ClassicBtn from '../Buttons/ClassicBtn';
-import FavoriteBtn from '../Buttons/FavoriteBtn';
-import UpLink from '../Others/UpLink';
+import ClassicBtn from '../../ui/buttons/ClassicBtn';
+import FavoriteBtn from '../../ui/buttons/FavoriteBtn';
+import UpLink from '../UpLink';
 import QuoteText from './QuoteText';
 
 const isTextOverflow = (quote_id) => {
@@ -61,7 +61,7 @@ const Quote = ({ quote, user, openId, setOpenId, width }) => {
   const handleSetOpenId = useCallback(() => {
     setOpenId(quote._id == openId ? null : quote._id);
   }, [setOpenId, openId]);
-  
+
   return (
     <>
       <div

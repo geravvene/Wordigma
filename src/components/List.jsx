@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 
-import Title from '../Others/Title.jsx';
-import SelectionBar from '../Options/SelectionBar.jsx';
+import Title from './Title.jsx';
+import SelectionBar from './SelectionBar.jsx';
 
 const getFilter = (n, filter) => {
   switch (filter) {
@@ -79,7 +79,7 @@ export const List = ({
   const handleSearch = useCallback((e) => {
     setSearch(e.target.value);
   }, []);
-  
+
   return (
     <>
       <Title text={title}>
