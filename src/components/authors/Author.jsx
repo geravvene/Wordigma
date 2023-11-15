@@ -17,7 +17,7 @@ const Author = ({ author }) => {
         <UpLink
           name={author.name}
           path={`/authors/${author._id}`}
-          style={`h-[10%]`}
+          style={`h-[15%]`}
           id={`author${author._id}`}
         >
           <img

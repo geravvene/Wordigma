@@ -1,34 +1,33 @@
 import { useCallback } from 'react';
 import { useQuery } from 'react-query';
+import { useForm } from 'react-hook-form';
 
 import { DataService } from '../../services/data.service';
 import Input from './Input';
 import Form from './Form';
-import { useMutateForm } from '../../hooks/useMutateForm';
 
-const CreateQuote = ({ setText }) => {
+const QuoteForm = ({ onSubmit }) => {
   const { data, isLoading, isFetching } = useQuery([`authors`], () =>
     DataService.getData(`authors`)
   );
 
-  const { errors, register, mutate, isSubmitting, handleSubmit, reset } =
-    useMutateForm('quotes', 'text', {
-      onSuccess: () => {
-        setText('Цитата добавлена');
-        reset();
-      },
-      onError: (error) => setText(error.message),
-    });
-    
-  const changeData = useCallback((data) => {
-    mutate({ ...data, author: JSON.parse(data.author) });
-  }, []);
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { isSubmitting, errors },
+  } = useForm({ mode: `onChange`, criteriaMode: 'all' });
+
+  const handleOnSubmit = useCallback((data) => {
+    onSubmit({ ...data, author: JSON.parse(data.author) });
+    reset();
+  }, [onSubmit]);
 
   if (isLoading || isFetching) return <p>Loading...</p>;
   return (
     <>
       <Form
-        onSubmit={handleSubmit(changeData)}
+        onSubmit={handleSubmit(handleOnSubmit)}
         button={{ disabled: isSubmitting, color: 'bg-blue', type: 'submit' }}
         text={'Создать'}
         title={'Создать Цитату'}
@@ -68,4 +67,5 @@ const CreateQuote = ({ setText }) => {
     </>
   );
 };
-export default CreateQuote;
+
+export default QuoteForm;

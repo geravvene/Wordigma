@@ -1,4 +1,5 @@
 import QuoteText from '../Quotes/QuoteText';
+
 const FormPage = ({ children, text }) => {
   return (
     <div className={`absolute h-full w-full flexcol`}>

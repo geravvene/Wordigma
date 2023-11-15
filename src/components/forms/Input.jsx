@@ -24,4 +24,5 @@ const Input = ({ name, register, errors, arg }) => {
     </>
   );
 };
+
 export default Input;

@@ -1,33 +1,26 @@
 import { useCallback } from 'react';
+import { useForm } from 'react-hook-form';
 
-import { DataService } from '../../services/data.service';
-import { useMutateForm } from '../../hooks/useMutateForm';
 import Input from './Input';
 import Form from './Form';
 
-const CreateAuthor = ({ setText }) => {
-  const { errors, register, mutate, isSubmitting, handleSubmit, reset } =
-    useMutateForm(
-      'authors',
-      'name',
-      {
-        onSuccess: () => {
-          setText('Автор добавлен');
-          reset();
-        },
-        onError: (error) => setText(error.message),
-      },
-      DataService.postDataWithFile
-    );
+const AuthorForm = ({ onSubmit }) => {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { isSubmitting, errors },
+  } = useForm({ mode: `onChange`, criteriaMode: 'all' });
 
-  const changeData = useCallback((data) => {
-    mutate({ ...data, img: data.img.item(0) });
-  }, []);
-  
+  const handleOnSubmit = useCallback((data) => {
+    onSubmit({ ...data, img: data.img.item(0) });
+    reset();
+  }, [onSubmit]);
+
   return (
     <>
       <Form
-        onSubmit={handleSubmit(changeData)}
+        onSubmit={handleSubmit(handleOnSubmit)}
         button={{ disabled: isSubmitting, color: 'bg-blue', type: 'submit' }}
         text={'Создать'}
         title={'Создать Автора'}
@@ -81,4 +74,5 @@ const CreateAuthor = ({ setText }) => {
     </>
   );
 };
-export default CreateAuthor;
+
+export default AuthorForm;
