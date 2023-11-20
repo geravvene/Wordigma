@@ -3,10 +3,8 @@ import { useQuery } from 'react-query';
 import { DataService } from '../../services/data.service';
 import Author from './Author';
 import { List } from '../List';
-
-const sorts = [`По алфавиту`, `Количество цитат`];
-const filters = [`Есть избранное`];
-const search = 'name';
+import filters from './AuthorsFilters';
+import sorts from './AuthorsSorts';
 
 const currentAuthorList = (data) =>
   data?.map((author) => <Author key={author._id} author={author} />);
@@ -26,7 +24,7 @@ const AuthorList = () => {
         loading={[isFetching, isLoading]}
         sorts={sorts}
         filters={filters}
-        currentSearch={search}
+        currentSearch={'name'}
         currentList={currentAuthorList}
       />
     </>
@@ -34,3 +32,5 @@ const AuthorList = () => {
 };
 
 export default AuthorList;
+
+

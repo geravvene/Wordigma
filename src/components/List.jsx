@@ -1,60 +1,10 @@
 import { useCallback, useState } from 'react';
 
 import Title from './Title.jsx';
-import SelectionBar from './SelectionBar.jsx';
+import SelectionBar from './forms/SelectionBar.jsx';
 
-const getFilter = (n, filter) => {
-  switch (filter) {
-    case `Избранное`:
-      return JSON.parse(window.localStorage.getItem(`user`)).favorite.includes(
-        n._id
-      );
-    case `Неизбранное`:
-      return !JSON.parse(window.localStorage.getItem(`user`)).favorite.includes(
-        n._id
-      );
-    case `Есть избранное`:
-      const favorite = JSON.parse(window.localStorage.getItem(`user`)).favorite;
-      for (let i = 0; i < n.quotes.length; i++) {
-        for (let index = 0; index < favorite.length; index++) {
-          if (n.quotes[i]._id == favorite[index]) return true;
-        }
-      }
-      return false;
-    default:
-      return true;
-  }
-};
-const getSort = (a, b, sort) => {
-  switch (sort) {
-    case `Длина больше`:
-      return b.text.length - a.text.length;
-    case `Длина меньше`:
-      return a.text.length - b.text.length;
-    case `По алфавиту`:
-      return a.name.localeCompare(b.name);
-    case `Количество цитат`:
-      return b.quotes.length - a.quotes.length;
-    // case `Количество избранных цитат`:
-    //   const favorite = JSON.parse(window.localStorage.getItem(`user`)).favorite;
-    //   let a_amount = 0,
-    //     b_amount = 0;
-    //   for (
-    //     let i = 0;
-    //     i <
-    //     (a.quotes.length < b.quotes.length ? b.quotes.length : a.quotes.length);
-    //     i++
-    //   ) {
-    //     for (let index = 0; index < favorite.length; index++) {
-    //       if (a.quotes[i]?._id == favorite[index]) a_amount++;
-    //       if (b.quotes[i]?._id == favorite[index]) b_amount++;
-    //     }
-    //   }
-    //   return b_amount - a_amount;
-    default:
-      return 0;
-  }
-};
+const deleteEmptyProperties = (obj) =>
+  Object.fromEntries(Object.entries(obj).filter((v) => !!v[1]));
 
 export const List = ({
   data,
@@ -65,20 +15,49 @@ export const List = ({
   currentSearch,
   currentList,
 }) => {
-  const [search, setSearch] = useState(``);
+  const [currentFilter, setFilter] = useState({});
 
-  const [filter, setFilter] = useState();
-
-  const [sort, setSort] = useState();
+  const [currentSort, setSort] = useState({ sort: undefined, reverse: false });
 
   const filterData = data
-    ?.filter((n) => getFilter(n, filter))
-    .sort((a, b) => getSort(a, b, sort))
-    .filter((n) => n[currentSearch].match(new RegExp(search, `i`)));
+    ?.filter((obj) =>
+      Object.values(deleteEmptyProperties(currentFilter)).every((filter) =>
+        filter(obj)
+      )
+    )
+    .sort(currentSort.sort);
 
-  const handleSearch = useCallback((e) => {
-    setSearch(e.target.value);
-  }, []);
+  const handleSearch = useCallback(
+    (e) => {
+      setFilter((prev) => ({
+        ...prev,
+        search: e.target.value
+          ? (n) => n[currentSearch].match(new RegExp(e.target.value, `i`))
+          : null,
+      }));
+    },
+    [setFilter, currentSearch]
+  );
+
+  const changeFilter = useCallback(
+    (obj) => {
+      setFilter((prev) => ({
+        ...prev,
+        ...obj,
+      }));
+    },
+    [setFilter]
+  );
+
+  const changeSort = useCallback(
+    (obj) => {
+      setSort((prev) => ({
+        ...prev,
+        ...obj,
+      }));
+    },
+    [setSort]
+  );
 
   return (
     <>
@@ -92,10 +71,8 @@ export const List = ({
         <SelectionBar
           sorts={sorts}
           filters={filters}
-          fltr={filter}
-          setFilter={setFilter}
-          srt={sort}
-          setSort={setSort}
+          setFilter={changeFilter}
+          setSort={changeSort}
         />
       </Title>
       <div className={`content`}>
@@ -104,7 +81,11 @@ export const List = ({
         ) : !filterData?.length ? (
           <p>{`Не найдено`}</p>
         ) : (
-          <div className={`grid12`}>{currentList(filterData)}</div>
+          <div className={`grid12`}>
+            {currentList(
+              currentSort.reverse ? filterData.reverse() : filterData
+            )}
+          </div>
         )}
       </div>
     </>

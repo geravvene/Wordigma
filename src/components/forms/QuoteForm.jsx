@@ -1,16 +1,13 @@
 import { useCallback } from 'react';
-import { useQuery } from 'react-query';
 import { useForm } from 'react-hook-form';
 
-import { DataService } from '../../services/data.service';
+import { ErrorMessage } from '@hookform/error-message';
+
 import Input from './Input';
 import Form from './Form';
+import SelectAuthor from './SelectAuthor';
 
 const QuoteForm = ({ onSubmit }) => {
-  const { data, isLoading, isFetching } = useQuery([`authors`], () =>
-    DataService.getData(`authors`)
-  );
-
   const {
     register,
     handleSubmit,
@@ -18,12 +15,14 @@ const QuoteForm = ({ onSubmit }) => {
     formState: { isSubmitting, errors },
   } = useForm({ mode: `onChange`, criteriaMode: 'all' });
 
-  const handleOnSubmit = useCallback((data) => {
-    onSubmit({ ...data, author: JSON.parse(data.author) });
-    reset();
-  }, [onSubmit]);
+  const handleOnSubmit = useCallback(
+    (data) => {
+      onSubmit({ ...data, author: JSON.parse(data.author) });
+      reset();
+    },
+    [onSubmit]
+  );
 
-  if (isLoading || isFetching) return <p>Loading...</p>;
   return (
     <>
       <Form
@@ -50,18 +49,24 @@ const QuoteForm = ({ onSubmit }) => {
           />
         </div>
         <div className={`flexcol col-span-6 gap-3`}>
-          <select
-            className="input"
-            {...register(`author`, {
-              required: `Автор необходим`,
+          <SelectAuthor
+            properties={register(`author`, {
+              validate: (value) => value !== '' || 'Выберете автора',
             })}
-          >
-            {data.map((author) => (
-              <option key={author._id} value={JSON.stringify(author)}>
-                {author.name}
-              </option>
-            ))}
-          </select>
+            title="Выбрать автора"
+          />
+          <ErrorMessage
+            errors={errors}
+            name={'author'}
+            render={({ messages }) =>
+              messages &&
+              Object.entries(messages).map(([type, message]) => (
+                <p key={type} className={`error`}>
+                  {message}
+                </p>
+              ))
+            }
+          />
         </div>
       </Form>
     </>

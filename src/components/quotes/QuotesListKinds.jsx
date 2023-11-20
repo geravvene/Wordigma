@@ -1,11 +1,13 @@
-const sorts = [`Дата добавления`, `Длина больше`, `Длина меньше`];
-const filters = [`Избранное`, `Неизбранное`];
-export const types = new Map([
+import sorts from './QuoteSorts';
+import filters from './QuotesFilters';
+
+const kinds = new Map([
   [
     'Цитаты',
     {
-      sorts: sorts.slice(1),
+      sorts: sorts,
       path: (user) => (user ? `quotes/rec/${user}` : `quotes`),
+      filters: filters,
     },
   ],
   [
@@ -13,13 +15,16 @@ export const types = new Map([
     {
       sorts: sorts,
       path: (user) => `quotes/fav/${user}`,
+      filters: [filters[0]],
     },
   ],
   [
     'Цитаты автора',
     {
       sorts: sorts,
-      filters: filters,
+      filters: [filters[1]],
     },
   ],
 ]);
+
+export default kinds;

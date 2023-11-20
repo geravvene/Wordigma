@@ -13,7 +13,7 @@ const Quotes = ({ data, user }) => {
       Array.from(Array(amount), (_, bigIndex) =>
         data.filter((_, index) => !((index + amount - bigIndex) % amount))
       ),
-    [amount]
+    [amount, data]
   );
 
   return list.map((dataColumn, index) => (
