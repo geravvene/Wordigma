@@ -1,8 +1,8 @@
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import UlMenu from './ul/UlMenu';
-import LiOption from './li/LiOption';
+import UlMenu from '@ui/ul/UlMenu';
+import LiOption from '@ui/li/LiOption';
 
 const Navbar = ({ isActive, setClose, refs, location }) => {
   const user_img = useSelector((state) => state.userReducer?.img);

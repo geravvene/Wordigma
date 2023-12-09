@@ -1,11 +1,11 @@
-import { useRef, useState, useCallback, useEffect } from 'react';
+import { useState, useCallback} from 'react';
 import { useLocation } from 'react-router-dom';
 import { VscThreeBars } from 'react-icons/vsc';
 
 import device from 'current-device';
 
-import ClassicBtn from './buttons/ClassicBtn';
-import logo from '../../assets/images/logo.png';
+import ClassicBtn from '@ui/buttons/ClassicBtn';
+import logo from '@img/logo.png';
 import Navbar from './Navbar';
 
 const refs = [
@@ -15,32 +15,11 @@ const refs = [
   { value: `Авторы`, href: `authors` },
 ];
 
-const HeaderPositionController = (head) => {
-  $(window).scroll(function () {
-    if ($(this).scrollTop() > 1) {
-      head.current.classList.add(`fixed`);
-      $(`main`).css({
-        paddingTop: head.current.getBoundingClientRect().height + `px`,
-      });
-    } else {
-      head.current.classList.remove(`fixed`);
-      $(`main`).css({
-        paddingTop: ``,
-      });
-    }
-  });
-};
-
 const Header = () => {
   const { pathname } = useLocation();
 
   const [isNavActive, setIsNavActive] = useState(false);
 
-  const head = useRef(null);
-
-  useEffect(() => {
-    HeaderPositionController(head);
-  }, []);
 
   const setStateTrue = useCallback(() => {
     setIsNavActive(true);
@@ -56,8 +35,7 @@ const Header = () => {
     <>
       <header
         onMouseLeave={setStateFalse}
-        ref={head}
-        className={`flexcol w-full z-20`}
+        className={`flexcol w-full z-20 fixed`}
       >
         <div className={`bg-gray-dark flex betcenter p-2 pl-3 pr-3`}>
           {device.mobile() ? (
@@ -101,4 +79,5 @@ const Header = () => {
     </>
   );
 };
+
 export default Header;

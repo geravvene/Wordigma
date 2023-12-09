@@ -1,6 +1,6 @@
 import { useQuery } from 'react-query';
 
-import { DataService } from '../../services/data.service';
+import { DataService } from '@serv/data.service';
 
 const SelectAuthor = ({ properties, title }) => {
   const { data } = useQuery([`authors`], () => DataService.getData(`authors`));

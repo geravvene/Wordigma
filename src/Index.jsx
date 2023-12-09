@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom/client';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Provider } from 'react-redux';
 
-import store from './store/store.js';
-import Router from './Router.jsx';
+import store from '@store/store.js';
+import Router from '@/Router';
 
 const queryClient = new QueryClient();
 

@@ -1,4 +1,4 @@
-import QuoteText from '../Quotes/QuoteText';
+import QuoteText from '@comp/Quotes/QuoteText';
 
 const FormPage = ({ children, text }) => {
   return (

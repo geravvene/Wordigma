@@ -1,10 +1,10 @@
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 
-import { DataService } from '../services/data.service.jsx';
-import Title from '../components/Title.jsx';
-import WikiFrame from '../components/WikiFrame.jsx';
-import QuotesList from '../components/Quotes/QuotesList.jsx';
+import { DataService } from '@serv/data.service.jsx';
+import Title from '@comp/Title.jsx';
+import WikiFrame from '@comp/WikiFrame.jsx';
+import QuotesList from '@comp/Quotes/QuotesList.jsx';
 
 
 const AuthorPage = () => {

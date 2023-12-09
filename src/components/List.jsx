@@ -1,10 +1,8 @@
 import { useCallback, useState } from 'react';
 
-import Title from './Title.jsx';
-import SelectionBar from './forms/SelectionBar.jsx';
-
-const deleteEmptyProperties = (obj) =>
-  Object.fromEntries(Object.entries(obj).filter((v) => !!v[1]));
+import Title from './Title';
+import SelectionBar from '@forms/SelectionBar';
+import {deleteEmptyProperties} from '@utils/funcs'
 
 export const List = ({
   data,

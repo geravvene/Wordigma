@@ -2,7 +2,7 @@ import { useDispatch } from 'react-redux';
 import { useMemo } from 'react';
 import { bindActionCreators } from 'redux';
 
-import { userSlice } from '../store/user/user.slice';
+import { userSlice } from '@store/user/user.slice';
 
 const rootActions = {
   ...userSlice.actions,

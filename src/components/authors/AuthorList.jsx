@@ -1,8 +1,8 @@
 import { useQuery } from 'react-query';
 
-import { DataService } from '../../services/data.service';
+import { DataService } from '@serv/data.service';
 import Author from './Author';
-import { List } from '../List';
+import { List } from '@comp/List';
 import filters from './AuthorsFilters';
 import sorts from './AuthorsSorts';
 

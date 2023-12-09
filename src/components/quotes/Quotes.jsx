@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import useResize from '../../hooks/useResize';
+import useResize from '@hooks/useResize';
 import QuotesColumn from './QuotesColumn';
 
 const Quotes = ({ data, user }) => {

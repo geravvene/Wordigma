@@ -4,7 +4,7 @@ import { VscHeart } from 'react-icons/vsc';
 import { VscHeartFilled } from 'react-icons/vsc';
 
 import ClassicBtn from './ClassicBtn';
-import useActions from '../../hooks/useActions';
+import useActions from '@hooks/useActions';
 
 const FavoriteBtn = ({ quote_id }) => {
   const isFavorite = useSelector(

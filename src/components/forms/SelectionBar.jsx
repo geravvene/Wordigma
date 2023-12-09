@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { VscSortPrecedence } from 'react-icons/vsc';
 
-import UlMenu from '../../ui/ul/UlMenu';
-import ClassicBtn from '../../ui/buttons/ClassicBtn';
+import UlMenu from '@ui/ul/UlMenu';
+import ClassicBtn from '@ui/buttons/ClassicBtn';
 import SelectSort from './SelectSort';
 
 const SelectionBar = ({ sorts, filters, setFilter, setSort }) => {

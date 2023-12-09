@@ -1,10 +1,10 @@
 import { useState } from 'react';
 
-import { DataService } from '../services/data.service';
-import useMutate from '../hooks/useMutate';
-import QuoteForm from '../components/forms/QuoteForm';
-import AuthorForm from '../components/forms/AuthorForm';
-import FormPage from '../components/forms/FormPage';
+import { DataService } from '@serv/data.service';
+import useMutate from '@hooks/useMutate';
+import QuoteForm from '@forms/QuoteForm';
+import AuthorForm from '@forms/AuthorForm';
+import FormPage from '@forms/FormPage';
 
 const CreatePage = () => {
   const [text, setText] = useState('Введите данные');

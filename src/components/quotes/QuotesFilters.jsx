@@ -1,5 +1,5 @@
-import SelectAuthor from '../forms/SelectAuthor';
-import SelectFavorite from '../forms/SelectFavorite';
+import SelectAuthor from '@forms/SelectAuthor';
+import SelectFavorite from '@forms/SelectFavorite';
 
 const filters = [
   (onChange) => (

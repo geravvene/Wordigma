@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 
-import UpLink from '../UpLink';
+import UpLink from '@comp/UpLink';
 
 const Author = ({ author }) => {
   const onHover = useCallback(() => {

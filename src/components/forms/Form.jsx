@@ -1,5 +1,5 @@
-import ClassicBtn from '../../ui/buttons/ClassicBtn';
-import Title from '../Title';
+import ClassicBtn from '@ui/buttons/ClassicBtn';
+import Title from '@comp/Title';
 
 const Form = ({ children, text, button, arg, title, onSubmit }) => {
   return (

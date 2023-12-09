@@ -1,52 +1,20 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useRef, useState, useEffect, useCallback } from 'react';
 import { VscChevronDown } from 'react-icons/vsc';
 
-import ClassicBtn from '../../ui/buttons/ClassicBtn';
-import FavoriteBtn from '../../ui/buttons/FavoriteBtn';
-import UpLink from '../UpLink';
+import ClassicBtn from '@ui/buttons/ClassicBtn';
+import FavoriteBtn from '@ui/buttons/FavoriteBtn';
+import UpLink from '@comp/UpLink';
 import QuoteText from './QuoteText';
+import sizeControl from './QuoteSizeControl'
 
-const isTextOverflow = (quote_id) => {
-  return (
-    $(`#text${quote_id}`).height() >=
-    125 - (window.location.href.includes(`authors`) ? 0 : 25)
-  );
-};
 
-const QuoteSizeController = (quote_id, open, setOpen, width) => {
-  if (open.isOpen && !open.wasOpen) {
-    $(`#${quote_id}`).css({
-      height:
-        $(`#text${quote_id}`).height() +
-        (window.location.href.includes(`authors`) ? 5 : 30) +
-        `px`,
-    });
-    setOpen({ ...open, wasOpen: true });
-  } else {
-    $(`#${quote_id}`).css({
-      height: `125px`,
-    });
-    setOpen({ ...open, wasOpen: false });
-  }
-  if (isTextOverflow(quote_id, width)) {
-    $(`#text${quote_id}`).removeClass(`self-center`);
-    $(`#more${quote_id}`).removeClass(`hidden`);
-    $(`#more${quote_id}`).addClass(`flex`);
-  } else if (open.wasOpen) {
-    $(`#text${quote_id}`).removeClass(`self-center`);
-    $(`#${quote_id}`).css({
-      height: `125px`,
-    });
-    setOpen({ wasOpen: false, isOpen: false });
-  } else {
-    $(`#text${quote_id}`).addClass(`self-center`);
-    $(`#more${quote_id}`).removeClass(`flex`);
-    $(`#more${quote_id}`).addClass(`hidden`);
-  }
-};
 
 const Quote = ({ quote, user, openId, setOpenId, width }) => {
   const [open, setOpen] = useState({ isOpen: false, wasOpen: false });
+
+  const refQuote = useRef(null);
+  const refText = useRef(null);
+  const refMore = useRef(null);
 
   useEffect(() => {
     if (openId != quote._id) setOpen({ ...open, isOpen: false });
@@ -54,7 +22,15 @@ const Quote = ({ quote, user, openId, setOpenId, width }) => {
   }, [openId]);
 
   useEffect(
-    () => QuoteSizeController(quote._id, open, setOpen, width),
+    () =>
+      sizeControl(
+        open,
+        setOpen,
+        refQuote.current,
+        refText.current,
+        refMore.current,
+       
+      ),
     [open.isOpen, width]
   );
 
@@ -65,6 +41,7 @@ const Quote = ({ quote, user, openId, setOpenId, width }) => {
   return (
     <>
       <div
+        ref={refQuote}
         id={`${quote._id}`}
         className={`duration-100 flexcol justify-between bg-gray-light round shadows w-full h-[125px]`}
       >
@@ -75,14 +52,14 @@ const Quote = ({ quote, user, openId, setOpenId, width }) => {
               : `mb-[25px]`
           }`}
         >
-          <QuoteText style={`text-justify mr-2 ml-2`} id={`text${quote._id}`}>
-            {quote.text}
-          </QuoteText>
-
+          <div ref={refText} className="h-fit">
+            <QuoteText style={`text-justify mr-2 ml-2`}>{quote.text}</QuoteText>
+          </div>
           <div className={`min-w-fit flex flex-col items-center`}>
             {user ? <FavoriteBtn quote_id={quote._id} /> : null}
 
             <div
+              ref={refMore}
               id={`more${quote._id}`}
               className={`max-w-fit h-full items-center hidden ${
                 user ? `` : `mr-1`

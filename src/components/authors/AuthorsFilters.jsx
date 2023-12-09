@@ -1,4 +1,4 @@
-import SelectFavorite from '../forms/SelectFavorite';
+import SelectFavorite from '@forms/SelectFavorite';
 
 const filters = [
   (onChange) => (

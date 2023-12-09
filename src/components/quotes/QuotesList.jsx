@@ -1,10 +1,10 @@
 import { useQuery } from 'react-query';
 import { useSelector } from 'react-redux';
 
-import { DataService } from '../../services/data.service';
+import { DataService } from '@serv/data.service';
 import kinds from './QuotesListKinds';
 import Quotes from './Quotes';
-import { List } from '../List';
+import { List } from '@comp/List';
 
 const currentList = (user, data) => <Quotes data={data} user={user} />;
 

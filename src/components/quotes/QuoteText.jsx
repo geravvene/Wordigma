@@ -1,11 +1,10 @@
 import { memo } from "react";
 
-const QuoteText = ({ style, id, children }) => {
+const QuoteText = ({ style, children }) => {
   return (
     <>
       <div
-        id={id}
-        className={`italic flex hyphens-auto h-fit rounded-md ${style}`}
+        className={`italic flex hyphens-auto rounded-md ${style}`}
       >
         <p>"</p>
         {children}"

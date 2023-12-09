@@ -1,7 +1,7 @@
-import { DataService } from '../services/data.service';
+import { DataService } from '@serv/data.service';
 import { useMutation } from 'react-query';
 
-import { FuncService } from '../utils/funcs';
+import { checkExistence } from '@utils/funcs';
 
 const useMutate = (path, check, options, func) => {
   const { mutate } = useMutation(

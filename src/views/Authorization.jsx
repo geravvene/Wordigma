@@ -2,11 +2,11 @@ import { useCallback, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
-import { FuncService } from '../utils/funcs';
-import useMutate from '../hooks/useMutate';
-import FormPage from '../components/forms/FormPage';
-import useActions from '../hooks/useActions';
-import UserForm from '../components/forms/UserForm';
+import { checkExistence } from '@utils/funcs';
+import useMutate from '@hooks/useMutate';
+import FormPage from '@forms/FormPage';
+import useActions from '@hooks/useActions';
+import UserForm from '@forms/UserForm';
 
 const Authorization = () => {
   const user_id = useSelector((state) => state.userReducer?._id);

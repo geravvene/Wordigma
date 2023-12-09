@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { FaSortAmountDownAlt } from 'react-icons/fa';
 import { FaSortAmountUpAlt } from 'react-icons/fa';
 
-import ClassicBtn from '../../ui/buttons/ClassicBtn';
+import ClassicBtn from '@ui/buttons/ClassicBtn';
 
 const SelectSort = ({ sorts, onChange }) => {
   const [reverse, setReverse] = useState(false);

@@ -1,10 +1,10 @@
 import { useSelector } from 'react-redux';
 import { Navigate, Link } from 'react-router-dom';
 
-import Title from '../components/Title.jsx';
-import ClassicBtn from '../ui/buttons/ClassicBtn.jsx';
-import QuotesList from '../components/Quotes/QuotesList.jsx';
-import useActions from '../hooks/useActions.jsx';
+import Title from '@comp/Title.jsx';
+import ClassicBtn from '@ui/buttons/ClassicBtn';
+import QuotesList from '@comp/Quotes/QuotesList';
+import useActions from '@hooks/useActions';
 
 const Profile = () => {
   const user = useSelector((state) => state.userReducer);
