@@ -19,7 +19,7 @@ const Authorization = () => {
 
   const checkAuthorization = useCallback(
     (acc) => {
-      FuncService.checkExistence(
+      checkExistence(
         `filter/users/${JSON.stringify({ name: acc.name })}`
       ).then((data) => {
         data
@@ -56,14 +56,14 @@ const Authorization = () => {
     <>
       <FormPage text={text}>
         <UserForm
-          onChange={checkAuthorization}
-          btnColor="green"
+          onSubmit={checkAuthorization}
+          btnColor="bg-green"
           btnText="Войти"
           formTitle="Вход"
         />
         <UserForm
-          onChange={handleRegistration}
-          btnColor="blue"
+          onSubmit={handleRegistration}
+          btnColor="bg-blue"
           btnText="Зарегистрироваться"
           formTitle="Регистрация"
         />

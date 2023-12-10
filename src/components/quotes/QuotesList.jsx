@@ -9,7 +9,7 @@ import { List } from '@comp/List';
 const currentList = (user, data) => <Quotes data={data} user={user} />;
 
 const QuotesList = ({ title, author }) => {
-  const user_id = useSelector((state) => state.userReducer._id);
+  const user_id = useSelector((state) => state.userReducer?._id);
 
   const { data, isLoading, isFetching } = useQuery(
     [title],
