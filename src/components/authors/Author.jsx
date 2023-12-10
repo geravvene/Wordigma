@@ -1,6 +1,12 @@
 import { useCallback } from 'react';
 
 import UpLink from '@comp/UpLink';
+import noImage from '@img/no_image.jpg';
+
+const imgError = (e) => {
+  e.currentTarget.src = noImage;
+  e.currentTarget.onerror = null;
+};
 
 const Author = ({ author }) => {
   const onHover = useCallback(() => {
@@ -21,9 +27,9 @@ const Author = ({ author }) => {
           id={`author${author._id}`}
         >
           <img
-            alt={`author image`}
             className={`round h-full object-cover w-full`}
             src={author.img}
+            onError={imgError}
           />
         </UpLink>
       </div>
