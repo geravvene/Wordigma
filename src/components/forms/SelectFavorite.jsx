@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 
 const SelectFavorite = ({ title, properties }) => {
-  const favorite = useSelector((state) => state.userReducer.favorite);
+  const favorite = useSelector((state) => state.userReducer?.favorite);
 
   return (
     <select className="input" {...properties}>
