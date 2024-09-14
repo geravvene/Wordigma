@@ -7,8 +7,8 @@
 
 ## Setup
 ```
-"yarn install".
+yarn install
 ```
 ```
-Run "yarn run start".
+yarn run start
 ```
