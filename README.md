@@ -6,5 +6,9 @@
 Основной стек: TypeScript, React, Redux, Express, MongoDB, SCSS modules. 
 
 ## Setup
-1. Install dependencies by "yarn install".
-3. Run "yarn run start".
+```
+"yarn install".
+```
+```
+Run "yarn run start".
+```
